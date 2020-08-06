@@ -9,8 +9,7 @@ public class DashboardController {
 
     @RequestMapping({"/dashboard", "dashboard.html", "dashboard/index.html"})
     public String dashboard(Model model){
-        //return "pages/index.html";
-        return "pages/layout-sidenav-light.html";
+        return "pages/index.html";
     }
 
     @RequestMapping({"/dashboard/upload/"})
@@ -18,9 +17,14 @@ public class DashboardController {
         return "pages/upload.html";
     }
 
+    @RequestMapping({"/dashboard/enter/"})
+    public String addresult(Model model){
+        return "pages/enter.html";
+    }
+
     @RequestMapping("/dashboard/keys/")
     public String publickeys(Model model){
-        return "pages/register.html";
+        return "pages/key.html";
     }
 
     @RequestMapping("/dashboard/transcript/")
@@ -28,18 +32,18 @@ public class DashboardController {
         return "pages/layout-static.html";
     }
 
-    @RequestMapping({"/dashboard/myuploads/"})
+    @RequestMapping({"/dashboard/results/"})
     public String getResutlts(Model model){
-        return "pages/layout-sidenav-light.html";
+        return "pages/classresults.html";
     }
 
     @RequestMapping("/dashboard/mycourses/")
     public String mycourses(Model model){
-        return "pages/chart.html";
+        return "pages/transcript.html";
     }
 
-    @RequestMapping("/dashboard/students/mycourses/")
+    @RequestMapping("/dashboard/viewresults/")
     public String students(Model model){
-        return "pages/chart.html";
+        return "pages/view.html";
     }
 }

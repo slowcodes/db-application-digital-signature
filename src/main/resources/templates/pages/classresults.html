@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Digital Signature Result Processor :: Class Result</title>
+        <link href="../../css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">DS Result Processor</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Activity Log</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="login.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="index.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Interface</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Results
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/dashboard/upload/">Upload Results</a>
+                                    <a class="nav-link" href="/dashboard/enter/">Enter Results</a>
+                                    <a class="nav-link" href="/dashboard/veiwresults/">View Result</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Courses
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Manage Courses
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="login.html">View Courses</a>
+                                            <a class="nav-link" href="register.html">Course Result</a>
+                                            <a class="nav-link" href="password.html">Enrolled Students</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        Users
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="401.html">Lecturers</a>
+                                            <a class="nav-link" href="../error.html">Students</a>
+                                            <a class="nav-link" href="500.html">Administrators</a>
+                                        </nav>
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading">Security</div>
+                            <a class="nav-link" href="charts.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Public Keys
+                            </a>
+                            <a class="nav-link" href="tables.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Private Keys
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Administrator
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h4 class="mt-4"><!--Upload Result--></h4>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Semester result</li>
+                        </ol>
+                                                       <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-table mr-1"></i>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <center>
+                                            <h5>Department of Mathematics</h5>
+                                            2019/2020 Semester Examination Result for MTH 212 - Mathematical Methods
+                                        </center>
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Matric #</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                            </tr>
+                                            </thead>
+                                            <tfoot>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Matric #</th>
+                                                <th>Score</th>
+                                                <th>Grade</th>
+                                            </tr>
+                                            </tfoot>
+                                            <tbody>
+                                            <tr>
+                                                <td>Ugochukwu Onuigbo</td>
+                                                <td>2019/220202</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Micheal Ilediagu</td>
+                                                <td>2019/220290</td>
+                                                <td>73</td>
+                                                <td>A</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Anselem Uzodinma</td>
+                                                <td>2019/220394</td>
+                                                <td>33</td>
+                                                <td>F</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Uchenna Odoh</td>
+                                                <td>2019/220202</td>
+                                                <td>43</td>
+                                                <td>D</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Ibrahim Kabiru</td>
+                                                <td>2019/239404</td>
+                                                <td>55</td>
+                                                <td>C</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Oluwaseun Makanjola</td>
+                                                <td>2019/220952</td>
+                                                <td>88</td>
+                                                <td>A</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fumilayo Williams</td>
+                                                <td>2019/220992</td>
+                                                <td>56</td>
+                                                <td>C</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Chike Chiagozie</td>
+                                                <td>2019/2202383</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Salami Abubakar</td>
+                                                <td>2019/220202</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ibrahim Babagida</td>
+                                                <td>2019/220930</td>
+                                                <td>34</td>
+                                                <td>F</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Abdulami Abubakar</td>
+                                                <td>2019/220942</td>
+                                                <td>44</td>
+                                                <td>D</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Muhamadu Buhari</td>
+                                                <td>2019/220233</td>
+                                                <td>15</td>
+                                                <td>F</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Goodluck Jonathan</td>
+                                                <td>193930/202930</td>
+                                                <td>44</td>
+                                                <td>D</td>
+                                            </tr>
+                                            <tr>
+                                                <td>MTH 221</td>
+                                                <td>Real Analysis</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 223</td>
+                                                <td>Database Management Systems</td>
+                                                <td>40</td>
+                                                <td>E</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 221</td>
+                                                <td>Introduction to File Systems</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <b>Fourth Year</b><br/>
+                                                    <b>First Semester</b><br/>
+                                                    2001/2003 Academic session
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>3</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                    </div>
+
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Digital Signature Result Processor by Adams Gyamfi</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="../../js/scripts.js"></script>
+    </body>
+</html>
