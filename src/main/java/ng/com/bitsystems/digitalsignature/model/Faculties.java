@@ -1,10 +1,7 @@
 package ng.com.bitsystems.digitalsignature.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,4 +19,14 @@ public class Faculties extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty")
     private Set<Departments> departments = new HashSet<>();
+
+    @Builder
+    public Faculties(Long id, String faculty, Set<Departments> departments){
+        super(id);
+        this.faculty=faculty;
+
+        if(departments != null){
+            this.departments = departments;
+        }
+    }
 }
