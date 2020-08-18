@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Getter
 @Setter
@@ -33,7 +32,7 @@ public class Results extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "keys_id")
-    private Keys key;
+    private PublicKeys key;
 
     @ManyToOne
     @JoinColumn(name = "uploads_id")

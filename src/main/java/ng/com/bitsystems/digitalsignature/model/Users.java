@@ -4,11 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.security.Key;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +19,9 @@ public class Users extends AccountHolders {
     private Set<UsersPrivileges> usersPrivileges = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    private Set<Keys> keys = new HashSet<>();
+    private Set<PublicKeys> keys = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "publicKeys_id")
+    private PublicKeys publicKeys;
 }

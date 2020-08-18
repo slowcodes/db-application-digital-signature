@@ -17,10 +17,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Keys extends BaseEntity{
+public class PublicKeys extends BaseEntity{
     private String passphrase;
     private String publickey;
-    private String privateKey;
+
 
     @ManyToOne
     @JoinColumn(name = "users_id")
