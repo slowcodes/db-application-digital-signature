@@ -30,13 +30,11 @@ public class Results extends BaseEntity {
     @JoinColumn(name = "courses_id")
     private Courses course;
 
-    @ManyToOne
-    @JoinColumn(name = "keys_id")
-    private PublicKeys key;
 
     @ManyToOne
     @JoinColumn(name = "uploads_id")
     private Uploads upload;
+
 
     @Builder
     public Results(Long id, Students students, Sessions session, Courses course, Double testScore, Double examScore ){

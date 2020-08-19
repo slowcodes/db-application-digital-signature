@@ -19,9 +19,8 @@ public class Users extends AccountHolders {
     private Set<UsersPrivileges> usersPrivileges = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    private Set<PublicKeys> keys = new HashSet<>();
+    private Set<PrivateKeys> privateKeys = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "publicKeys_id")
-    private PublicKeys publicKeys;
+    @ManyToMany(mappedBy = "users")
+    private Set<PublicKeys> publicKeys = new HashSet<>();
 }

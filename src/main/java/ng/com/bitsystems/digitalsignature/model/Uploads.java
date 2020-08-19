@@ -27,4 +27,7 @@ public class Uploads extends BaseEntity {
 
     @OneToMany(mappedBy = "upload")
     private Set<Results> results = new HashSet<>();
+
+    @OneToOne
+    private PrivateKeys privateKeys;
 }

@@ -1,4 +1,4 @@
 package ng.com.bitsystems.digitalsignature.converters;
 
-public class UserPrivillegeConverter {
+public class CountiesToCountiesCommand {
 }

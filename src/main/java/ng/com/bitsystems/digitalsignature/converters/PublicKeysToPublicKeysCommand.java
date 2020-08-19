@@ -1,4 +1,4 @@
 package ng.com.bitsystems.digitalsignature.converters;
 
-public class PublicKeyConverters {
+public class PublicKeysToPublicKeysCommand {
 }

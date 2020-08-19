@@ -1,4 +1,4 @@
 package ng.com.bitsystems.digitalsignature.converters;
 
-public class ResultConverter {
+public class FacultiesToFacultiesCommand {
 }

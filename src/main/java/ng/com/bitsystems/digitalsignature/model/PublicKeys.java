@@ -22,12 +22,20 @@ public class PublicKeys extends BaseEntity{
     private String publickey;
 
 
-    @ManyToOne
-    @JoinColumn(name = "users_id")
-    private Users owner;
+    @ManyToMany
+    @JoinTable(name = "users_publickeys",
+            joinColumns = @JoinColumn(name = "publickeys_id"),
+            inverseJoinColumns = @JoinColumn(name = "users_id"))
+    private Set<Users> users = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "student_publickeys",
+            joinColumns = @JoinColumn(name = "publickeys_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
+    private Set<Students> students = new HashSet<>();
 
     private LocalDate createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "key")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicKey")
     private Set<Results> results = new HashSet<>();
 }

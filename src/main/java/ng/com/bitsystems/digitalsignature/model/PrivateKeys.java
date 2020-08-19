@@ -3,24 +3,28 @@ package ng.com.bitsystems.digitalsignature.model;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class PrivateKeys extends BaseEntity {
     private String passphrase;
     private String privateKey;
 
     @OneToOne
-    private PublicKeys owner;
+    private PublicKeys publicKeys;
 
     private LocalDate createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "key")
-    private Set<Users> users = new HashSet<>();
+    @OneToOne
+    private Results results;
+
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private Users users;
 }
