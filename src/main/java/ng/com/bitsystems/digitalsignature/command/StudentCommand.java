@@ -16,7 +16,6 @@ public class StudentCommand {
     private String lastName;
     private String sex;
     private String matricNumber;
-    private StudentCommand studentCommand;
     private DepartmentCommand departmentCommand;
     private Set<ResultCommand> resultCommands = new HashSet<>();
     private Set<PublicKeyCommand> publicKeyCommands = new HashSet<>();

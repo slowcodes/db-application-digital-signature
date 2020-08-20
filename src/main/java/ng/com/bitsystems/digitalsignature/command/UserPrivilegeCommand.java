@@ -1,9 +1,14 @@
 package ng.com.bitsystems.digitalsignature.command;
 
-import ng.com.bitsystems.digitalsignature.model.Privileges;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
+@NoArgsConstructor
 public class UserPrivilegeCommand {
     private Long id;
-    private UsersCommand command;
-    private Privileges privileges;
+    private UsersCommand usersCommand;
+    private PrivilegeCommand privileges;
 }

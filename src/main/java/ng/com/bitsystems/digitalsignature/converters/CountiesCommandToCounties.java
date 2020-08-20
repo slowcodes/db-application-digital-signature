@@ -5,22 +5,32 @@ import ng.com.bitsystems.digitalsignature.command.CountiesCommand;
 import ng.com.bitsystems.digitalsignature.model.Counties;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 
-public class CountiesCommandToCounties implements Converter<Counties, CountiesCommand> {
+@Component
+public class CountiesCommandToCounties implements Converter<CountiesCommand, Counties> {
+
+    private StudentsCommandToStudents studentsCommandToStudents;
+    private StateCommandToState stateCommandToState;
+
+    public CountiesCommandToCounties(StudentsCommandToStudents studentsCommandToStudents, StateCommandToState stateCommandToState) {
+        this.studentsCommandToStudents = studentsCommandToStudents;
+        this.stateCommandToState = stateCommandToState;
+    }
 
     @Synchronized
     @Nullable
     @Override
-    public CountiesCommand convert(Counties counties) {
+    public Counties convert(CountiesCommand countiesCommand) {
 
-        if(counties == null)
+        if(countiesCommand == null)
             return null;
 
-        final CountiesCommand countiesCommand = new CountiesCommand();
-        countiesCommand.setId(counties.getId());
+        final Counties counties = new Counties();
+        countiesCommand.setId(countiesCommand.getId());
         countiesCommand.setLga(counties.getLga());
         //countiesCommand.setStateCommand(counties.getState());
         //countiesCommand.getStudentCommand(counties.setStudents());
-        return  countiesCommand;
+        return  counties;
     }
 }

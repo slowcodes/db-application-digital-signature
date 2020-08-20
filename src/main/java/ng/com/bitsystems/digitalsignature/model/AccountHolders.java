@@ -10,7 +10,7 @@ import javax.persistence.MappedSuperclass;
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
-public class AccountHolders extends BaseEntity {
+public class AccountHolders extends Person {
 
     private String username;
     private String password;
@@ -18,7 +18,7 @@ public class AccountHolders extends BaseEntity {
 
     @Builder
     public AccountHolders(Long id, String username, String password, String email){
-        super(id);
+        //super(id);
         this.username = username;
         this.password = password;
         this.email = email;
