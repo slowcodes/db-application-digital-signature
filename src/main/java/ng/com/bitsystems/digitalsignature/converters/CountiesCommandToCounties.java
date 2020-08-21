@@ -13,9 +13,10 @@ public class CountiesCommandToCounties implements Converter<CountiesCommand, Cou
     private StudentsCommandToStudents studentsCommandToStudents;
     private StateCommandToState stateCommandToState;
 
-    public CountiesCommandToCounties(StudentsCommandToStudents studentsCommandToStudents, StateCommandToState stateCommandToState) {
+    public CountiesCommandToCounties(StudentsCommandToStudents studentsCommandToStudents,
+                                     StateCommandToState stateCommandToState) {
         this.studentsCommandToStudents = studentsCommandToStudents;
-        this.stateCommandToState = stateCommandToState;
+        this.stateCommandToState =stateCommandToState;
     }
 
     @Synchronized
@@ -27,10 +28,14 @@ public class CountiesCommandToCounties implements Converter<CountiesCommand, Cou
             return null;
 
         final Counties counties = new Counties();
-        countiesCommand.setId(countiesCommand.getId());
-        countiesCommand.setLga(counties.getLga());
-        //countiesCommand.setStateCommand(counties.getState());
-        //countiesCommand.getStudentCommand(counties.setStudents());
+        counties.setId(countiesCommand.getId());
+        counties.setLga(counties.getLga());
+        counties.setState(stateCommandToState.convert(countiesCommand.getStateCommand()));
+
+        if(countiesCommand.getStudentCommand().size()>0 & countiesCommand.getStudentCommand() != null){
+            countiesCommand.getStudentCommand().forEach(studentCommand -> counties.getStudents().add(studentsCommandToStudents.convert(studentCommand)));
+        }
+
         return  counties;
     }
 }
