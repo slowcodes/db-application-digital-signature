@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class StateCommandToState implements Converter<StateCommand, States> {
 
-    private StateToStateCommand stateToStateCommand;
+    private CountiesCommandToCounties countiesCommandToCounties;
 
-    public StateCommandToState(StateToStateCommand stateToStateCommand) {
-        this.stateToStateCommand = stateToStateCommand;
+    public StateCommandToState(CountiesCommandToCounties countiesCommandToCounties) {
+        this.countiesCommandToCounties = countiesCommandToCounties;
     }
 
     @Synchronized
@@ -24,9 +24,13 @@ public class StateCommandToState implements Converter<StateCommand, States> {
             return null;
         }
         States states = new States();
-        //states.setLgas(stateToStateCommand.);
+
+        if(stateCommand.getCountiesCommand().size()>0 && stateCommand.getCountiesCommand() != null)
+            stateCommand.getCountiesCommand().forEach(countiesCommand -> states.getLgas().add(countiesCommandToCounties.convert(countiesCommand)));
+
         states.setState(stateCommand.getState());
         states.setId(states.getId());
+
         return states;
     }
 }

@@ -14,5 +14,7 @@ public class PrivateKeyCommand {
     private Long id;
     private PublicKeyCommand publicKeyCommand;
     private LocalDate createdAt;
+    private String passphrase;
+    private UploadCommand uploadCommand;
     private UsersCommand usersCommand;
 }

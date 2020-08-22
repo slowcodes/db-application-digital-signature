@@ -19,4 +19,5 @@ public class UploadCommand {
     private CoursesCommand coursesCommand;
     private Set<ResultCommand> resultCommand = new HashSet<>();
     private PrivateKeyCommand privateKeyCommand;
+    private PublicKeyCommand publicKeyCommand;
 }

@@ -27,7 +27,7 @@ public class PrivateKeys extends BaseEntity {
     private LocalDate createdAt;
 
     @OneToOne
-    private Results results;
+    private Uploads uploads;
 
     @ManyToOne
     @JoinColumn(name = "users_id")

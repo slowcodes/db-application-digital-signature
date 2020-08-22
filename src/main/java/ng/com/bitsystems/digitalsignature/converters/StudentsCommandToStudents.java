@@ -1,8 +1,10 @@
 package ng.com.bitsystems.digitalsignature.converters;
 
+import lombok.Synchronized;
 import ng.com.bitsystems.digitalsignature.command.StudentCommand;
 import ng.com.bitsystems.digitalsignature.model.Students;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,15 +13,20 @@ public class StudentsCommandToStudents implements Converter<StudentCommand, Stud
     private CountiesCommandToCounties countiesCommandToCounties;
     private DepartmentCommandToDepartment departmentCommandToDepartment;
     private PublicKeysCommandToPublicKeys publicKeysCommandToPublicKeys;
+    private ResultsCommandToResults resultsCommandToResults;
 
     public StudentsCommandToStudents(CountiesCommandToCounties countiesCommandToCounties,
                                      DepartmentCommandToDepartment departmentCommandToDepartment,
-                                     PublicKeysCommandToPublicKeys publicKeysCommandToPublicKeys) {
+                                     PublicKeysCommandToPublicKeys publicKeysCommandToPublicKeys,
+                                     ResultsCommandToResults resultsCommandToResults) {
         this.countiesCommandToCounties = countiesCommandToCounties;
         this.departmentCommandToDepartment = departmentCommandToDepartment;
         this.publicKeysCommandToPublicKeys = publicKeysCommandToPublicKeys;
+        this.resultsCommandToResults = resultsCommandToResults;
     }
 
+    @Synchronized
+    @Nullable
     @Override
     public Students convert(StudentCommand studentCommand) {
         if(studentCommand == null)
@@ -36,6 +43,9 @@ public class StudentsCommandToStudents implements Converter<StudentCommand, Stud
         students.setFirstName(studentCommand.getFirstName());
         students.setFirstName(studentCommand.getFirstName());
         students.setSex(studentCommand.getSex());
+
+        if(studentCommand.getResultCommands().size()>0 && studentCommand.getResultCommands() != null)
+            studentCommand.getResultCommands().forEach(resultCommand -> students.getResults().add(resultsCommandToResults.convert(resultCommand)));
         return students;
     }
 }

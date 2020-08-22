@@ -19,5 +19,6 @@ public class PublicKeyCommand {
     private LocalDate createdAt;
     private Set<StudentCommand> studentCommands = new HashSet<>();
     private Set<UsersCommand> usersCommands = new HashSet<>();
-    private Set<ResultCommand> resultCommands = new HashSet<>();
+    private UploadCommand uploadCommand;
+    private PrivateKeyCommand privateKeyCommand;
 }

@@ -30,4 +30,7 @@ public class Uploads extends BaseEntity {
 
     @OneToOne
     private PrivateKeys privateKeys;
+
+    @OneToOne
+    private PublicKeys publicKeys;
 }

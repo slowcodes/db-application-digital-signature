@@ -12,14 +12,14 @@ public class DepartmentCommandToDepartment implements Converter<DepartmentComman
 
     private FacultiesCommandToFaculties facultiesCommandToFaculties;
     private CoursesCommandToCourses coursesCommandToCourses;
-    private StudentsToStudentsCommand studentsToStudentsCommand;
+    private StudentsCommandToStudents studentsCommandToStudents;
 
     public DepartmentCommandToDepartment(FacultiesCommandToFaculties facultiesCommandToFaculties,
                                          CoursesCommandToCourses coursesCommandToCourses,
-                                         StudentsToStudentsCommand studentsToStudentsCommand) {
+                                         StudentsCommandToStudents studentsCommandToStudents) {
         this.facultiesCommandToFaculties = facultiesCommandToFaculties;
         this.coursesCommandToCourses = coursesCommandToCourses;
-        this.studentsToStudentsCommand = studentsToStudentsCommand;
+        this.studentsCommandToStudents = studentsCommandToStudents;
     }
 
     @Synchronized
@@ -29,11 +29,17 @@ public class DepartmentCommandToDepartment implements Converter<DepartmentComman
         if(departmentCommand == null){
             return null;
         }
+
         Departments departments = new Departments();
-        //departments.setCourses(departmentCommand.getCoursesCommand());
+        if(departmentCommand.getCoursesCommand().size()>0 && departmentCommand.getCoursesCommand().size() !=0)
+            departmentCommand.getCoursesCommand().forEach(coursesCommand -> departments.getCourses().add(coursesCommandToCourses.convert(coursesCommand)));
+
         departments.setDepartment(departmentCommand.getDepartment());
-        //departments.setFaculty(departmentCommand.getFacultiesCommand());
-        //departments.setStudents();
+        departments.setFaculty(facultiesCommandToFaculties.convert(departmentCommand.getFacultiesCommand()));
+
+        if(departmentCommand.getStudentCommands().size()>0 && departmentCommand.getStudentCommands() !=null)
+            departmentCommand.getStudentCommands().forEach(studentCommand -> departments.getStudents().add(studentsCommandToStudents.convert(studentCommand)));
+
         departments.setId(departmentCommand.getId());
         return departments;
     }

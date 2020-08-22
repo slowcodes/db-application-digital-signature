@@ -28,9 +28,13 @@ public class CountiesToCountiesCommand implements Converter<Counties, CountiesCo
 
         CountiesCommand countiesCommand = new CountiesCommand();
         countiesCommand.setId(counties.getId());
-        //countiesCommand.setStateCommand();
+        countiesCommand.setStateCommand(stateToStateCommand.convert(counties.getState()));
         countiesCommand.setLga(counties.getLga());
-        //countiesCommand.setStudentCommand();
+
+        if(counties.getStudents().size()>0 && counties.getStudents() != null ){
+            counties.getStudents().forEach(students -> countiesCommand.getStudentCommand().add(studentsToStudentsCommand.convert(students)));
+        }
+
         return countiesCommand;
     }
 }

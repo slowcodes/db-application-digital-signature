@@ -10,13 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DepartmentsToDepartmentCommand implements Converter<Departments, DepartmentCommand> {
     private CoursesToCoursesCommand coursesToCoursesCommand;
-    private DepartmentCommandToDepartment departmentCommandToDepartment;
-    private FacultiesCommandToFaculties facultiesCommandToFaculties;
+    private DepartmentsToDepartmentCommand departmentsToDepartmentCommand;
+    private FacultiesToFacultiesCommand facultiesToFacultiesCommand;
 
-    public DepartmentsToDepartmentCommand(CoursesToCoursesCommand coursesToCoursesCommand, DepartmentCommandToDepartment departmentCommandToDepartment, FacultiesCommandToFaculties facultiesCommandToFaculties) {
+    public DepartmentsToDepartmentCommand(CoursesToCoursesCommand coursesToCoursesCommand,
+                                          DepartmentsToDepartmentCommand departmentsToDepartmentCommand,
+                                          FacultiesToFacultiesCommand facultiesToFacultiesCommand) {
         this.coursesToCoursesCommand = coursesToCoursesCommand;
-        this.departmentCommandToDepartment = departmentCommandToDepartment;
-        this.facultiesCommandToFaculties = facultiesCommandToFaculties;
+        this.departmentsToDepartmentCommand = departmentsToDepartmentCommand;
+        this.facultiesToFacultiesCommand = facultiesToFacultiesCommand;
     }
 
     @Synchronized
@@ -28,11 +30,12 @@ public class DepartmentsToDepartmentCommand implements Converter<Departments, De
             return null;
         }
         DepartmentCommand departmentCommand = new DepartmentCommand();
-        //departmentCommand.setCoursesCommand(coursesToCoursesCommand.convert(departments.getCourses()));
-        //departmentCommand.setDepartment(departments.getDepartment());
-        //departmentCommand.setFacultiesCommand();
+
+        if(departments.getCourses().size()>0 && departments.getCourses() != null)
+            departments.getCourses().forEach(courses -> departmentCommand.getCoursesCommand().add(coursesToCoursesCommand.convert(courses)));
+
         departmentCommand.setDepartment(departments.getDepartment());
-        departmentCommand.setId(departments.getId());
+        departmentCommand.setFacultiesCommand(facultiesToFacultiesCommand.convert(departments.getFaculty()));
         return departmentCommand;
     }
 

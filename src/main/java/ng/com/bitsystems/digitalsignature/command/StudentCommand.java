@@ -12,6 +12,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 public class StudentCommand {
+    private Long id;
     private String firstName;
     private String lastName;
     private String sex;

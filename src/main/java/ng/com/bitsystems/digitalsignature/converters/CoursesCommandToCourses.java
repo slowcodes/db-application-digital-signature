@@ -12,10 +12,14 @@ public class CoursesCommandToCourses implements Converter<CoursesCommand, Course
 
     private ResultsCommandToResults resultsCommandToResults;
     private DepartmentCommandToDepartment departmentCommandToDepartment;
+    private UploadCommandToUploads uploadCommandToUploads;
 
-    public CoursesCommandToCourses(ResultsCommandToResults resultsCommandToResults, DepartmentCommandToDepartment departmentCommandToDepartment) {
+    public CoursesCommandToCourses(ResultsCommandToResults resultsCommandToResults,
+                                   DepartmentCommandToDepartment departmentCommandToDepartment,
+                                   UploadCommandToUploads uploadCommandToUploads) {
         this.resultsCommandToResults = resultsCommandToResults;
         this.departmentCommandToDepartment = departmentCommandToDepartment;
+        this.uploadCommandToUploads = uploadCommandToUploads;
     }
 
     @Synchronized
@@ -30,9 +34,16 @@ public class CoursesCommandToCourses implements Converter<CoursesCommand, Course
         courses.setCourseCode(coursesCommand.getCourseCode());
         courses.setCourseTitle(coursesCommand.getCourseTitle());
         courses.setCredits(courses.getCredits());
-        //courses.setResults();
-        //courses.setServiceDepartment();
-        //courses.setUploads();
+
+        if(coursesCommand.getResultCommand().size()>0 && coursesCommand.getResultCommand() != null){
+            coursesCommand.getResultCommand().forEach(resultCommand -> courses.getResults().add(resultsCommandToResults.convert(resultCommand)));
+        }
+
+        courses.setServiceDepartment(departmentCommandToDepartment.convert(coursesCommand.getDepartmentCommand()));
+
+        if (coursesCommand.getUploadCommands().size()>0 && coursesCommand.getUploadCommands() != null){
+            coursesCommand.getUploadCommands().forEach(uploadCommand -> courses.getUploads().add(uploadCommandToUploads.convert(uploadCommand)));
+        }
         return courses;
     }
 }

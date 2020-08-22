@@ -21,7 +21,6 @@ public class PublicKeys extends BaseEntity{
     private String passphrase;
     private String publickey;
 
-
     @ManyToMany
     @JoinTable(name = "users_publickeys",
             joinColumns = @JoinColumn(name = "publickeys_id"),
@@ -36,6 +35,6 @@ public class PublicKeys extends BaseEntity{
 
     private LocalDate createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "publicKey")
-    private Set<Results> results = new HashSet<>();
+    @OneToOne
+    private PrivateKeys privateKeys;
 }

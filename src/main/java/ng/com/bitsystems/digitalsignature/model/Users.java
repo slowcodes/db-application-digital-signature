@@ -19,7 +19,7 @@ public class Users extends AccountHolders {
     private Set<UsersPrivileges> usersPrivileges = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    private Set<PrivateKeys> privateKeys = new HashSet<>();
+    private Set<Uploads> uploads = new HashSet<>();
 
     @ManyToMany(mappedBy = "users")
     private Set<PublicKeys> publicKeys = new HashSet<>();
