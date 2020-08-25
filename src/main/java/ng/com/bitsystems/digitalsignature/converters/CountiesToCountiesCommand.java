@@ -9,16 +9,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CountiesToCountiesCommand implements Converter<Counties, CountiesCommand> {
-    private StudentsToStudentsCommand studentsToStudentsCommand;
-    private StateToStateCommand stateToStateCommand;
 
-    public CountiesToCountiesCommand(StudentsToStudentsCommand studentsToStudentsCommand, StateToStateCommand stateToStateCommand) {
-        this.studentsToStudentsCommand = studentsToStudentsCommand;
-        this.stateToStateCommand = stateToStateCommand;
+    //private StudentsToStudentsCommand studentsToStudentsCommand;
+    //private StateToStateCommand stateToStateCommand;
+
+    public CountiesToCountiesCommand() {
+        //this.studentsToStudentsCommand = studentsToStudentsCommand;
+        //this.stateToStateCommand = stateToStateCommand;
     }
 
-    @Nullable
     @Synchronized
+    @Nullable
     @Override
     public CountiesCommand convert(Counties counties) {
 
@@ -28,12 +29,16 @@ public class CountiesToCountiesCommand implements Converter<Counties, CountiesCo
 
         CountiesCommand countiesCommand = new CountiesCommand();
         countiesCommand.setId(counties.getId());
-        countiesCommand.setStateCommand(stateToStateCommand.convert(counties.getState()));
+
+        if(countiesCommand.getStateCommand() !=null)
+            countiesCommand.setStateId(counties.getState().getId());
+
+        //countiesCommand.setStateCommand(stateToStateCommand.convert(counties.getState()));
         countiesCommand.setLga(counties.getLga());
 
-        if(counties.getStudents().size()>0 && counties.getStudents() != null ){
-            counties.getStudents().forEach(students -> countiesCommand.getStudentCommand().add(studentsToStudentsCommand.convert(students)));
-        }
+//        if(counties.getStudents().size()>0 && counties.getStudents() != null ){
+//            counties.getStudents().forEach(students -> countiesCommand.getStudentCommand().add(studentsToStudentsCommand.convert(students)));
+//        }
 
         return countiesCommand;
     }

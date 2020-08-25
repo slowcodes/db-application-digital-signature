@@ -2,7 +2,9 @@ package ng.com.bitsystems.digitalsignature.model;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,5 +25,11 @@ public class Sessions extends BaseEntity {
     public Sessions(Long id, String session){
         super(id);
         this.session = session;
+    }
+
+    public Sessions addResult(Results results) {
+        results.setSession(this);
+        this.results.add(results);
+        return this;
     }
 }

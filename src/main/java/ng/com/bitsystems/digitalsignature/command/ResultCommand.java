@@ -14,6 +14,9 @@ public class ResultCommand {
     private Double examScore;
     private Character grade;
     private Double totalScore;
+    private Long courseId;
+    private Long sessionId;
+    private Long studentId;
     private StudentCommand studentCommand;
     private SessionCommand sessionCommand;
     private CoursesCommand coursesCommand;

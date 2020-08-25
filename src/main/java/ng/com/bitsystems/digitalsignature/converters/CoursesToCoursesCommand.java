@@ -9,15 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CoursesToCoursesCommand implements Converter<Courses, CoursesCommand> {
-    private DepartmentsToDepartmentCommand departmentsToDepartmentCommand;
-    private UploadsToUploadCommmand uploadsToUploadCommmand;
-    private StudentsToStudentsCommand studentsToStudentsCommand;
 
-    public CoursesToCoursesCommand(StudentsToStudentsCommand studentsToStudentsCommand, DepartmentsToDepartmentCommand departmentsToDepartmentCommand, UploadsToUploadCommmand uploadsToUploadCommmand) {
-        this.departmentsToDepartmentCommand = departmentsToDepartmentCommand;
-        this.uploadsToUploadCommmand = uploadsToUploadCommmand;
-        this.studentsToStudentsCommand = studentsToStudentsCommand;
-    }
 
     @Synchronized
     @Nullable
@@ -30,10 +22,12 @@ public class CoursesToCoursesCommand implements Converter<Courses, CoursesComman
         coursesCommand.setCourseCode(courses.getCourseCode());
         coursesCommand.setCourseTitle(courses.getCourseTitle());
         coursesCommand.setCredits(courses.getCredits());
-        coursesCommand.setDepartmentCommand(departmentsToDepartmentCommand.convert(courses.getServiceDepartment()));
 
-        if(courses.getUploads().size()>0 && courses.getUploads() !=null)
-            courses.getUploads().forEach(upload -> coursesCommand.getUploadCommands().add(uploadsToUploadCommmand.convert(upload)));
+        if(courses.getServiceDepartment() != null)
+            coursesCommand.setDepartmentId(courses.getServiceDepartment().getId());
+
+//        if(courses.getUploads().size()>0 && courses.getUploads() !=null)
+//            courses.getUploads().forEach(upload -> coursesCommand.getUploadCommands().add(uploadsToUploadCommmand.convert(upload)));
 
         return coursesCommand;
     }

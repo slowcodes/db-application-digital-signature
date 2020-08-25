@@ -33,6 +33,7 @@ public class StudentsToStudentsCommand implements Converter<Students, StudentCom
             return null;
 
         StudentCommand studentCommand = new StudentCommand();
+        studentCommand.setId(students.getId());
         studentCommand.setFirstName(students.getFirstName());
         studentCommand.setDepartmentCommand(departmentsToDepartmentCommand.convert(students.getDepartment()));
         studentCommand.setLastName(students.getLastName());

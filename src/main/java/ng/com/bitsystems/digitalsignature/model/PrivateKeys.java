@@ -32,4 +32,10 @@ public class PrivateKeys extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "users_id")
     private Users users;
+
+    public PrivateKeys addPublicKey(PublicKeys publicKeys) {
+        publicKeys.setPrivateKeys(this);
+        this.setPublicKeys(publicKeys);
+        return this;
+    }
 }

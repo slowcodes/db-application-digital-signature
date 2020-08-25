@@ -12,4 +12,10 @@ public class IndexController {
         model.addAttribute("");
         return "pages/login/security/index.html";
     }
+
+//    @RequestMapping("register")
+//    public String register(Model model){
+//
+//        //return "pages/register.html";
+//    }
 }

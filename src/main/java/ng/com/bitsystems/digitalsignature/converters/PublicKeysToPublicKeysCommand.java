@@ -9,15 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PublicKeysToPublicKeysCommand implements Converter<PublicKeys, PublicKeyCommand> {
-    private UsersToUsersCommand usersToUsersCommand;
-    private StudentsToStudentsCommand studentsToStudentsCommand;
-    private PrivateKeysToPrivateKeysCommand privateKeysToPrivateKeysCommand;
 
-    public PublicKeysToPublicKeysCommand(UsersToUsersCommand usersToUsersCommand, StudentsToStudentsCommand studentsToStudentsCommand, PrivateKeysToPrivateKeysCommand privateKeysToPrivateKeysCommand) {
-        this.usersToUsersCommand = usersToUsersCommand;
-        this.studentsToStudentsCommand = studentsToStudentsCommand;
-        this.privateKeysToPrivateKeysCommand = privateKeysToPrivateKeysCommand;
-    }
 
     @Synchronized
     @Nullable
@@ -31,14 +23,10 @@ public class PublicKeysToPublicKeysCommand implements Converter<PublicKeys, Publ
         publicKeyCommand.setCreatedAt(publicKeys.getCreatedAt());
         publicKeyCommand.setId(publicKeys.getId());
         publicKeyCommand.setPublicKey(publicKeys.getPublickey());
-        publicKeyCommand.setPrivateKeyCommand(privateKeysToPrivateKeysCommand.convert(publicKeys.getPrivateKeys()));
+        //publicKeyCommand.setPrivateKeyCommand(privateKeysToPrivateKeysCommand.convert(publicKeys.getPrivateKeys()));
 
-        if(publicKeys.getUsers().size()>0 && publicKeys.getUsers() !=null){
-            publicKeys.getUsers().forEach(users -> publicKeyCommand.getUsersCommands().add(usersToUsersCommand.convert(users)));
-        }
-
-        if(publicKeys.getStudents().size()>0 && publicKeys.getStudents() !=null){
-            publicKeys.getStudents().forEach(students -> publicKeyCommand.getStudentCommands().add(studentsToStudentsCommand.convert(students)));
+        if(publicKeys.getPrivateKeys() != null){
+            publicKeyCommand.setPrivateKeyId(publicKeys.getPrivateKeys().getId());
         }
 
         return publicKeyCommand;

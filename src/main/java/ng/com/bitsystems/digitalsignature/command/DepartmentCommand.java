@@ -14,6 +14,7 @@ import java.util.Set;
 public class DepartmentCommand {
     private Long id;
     private String department;
+    private Long facultiesId;
     private Set<CoursesCommand> coursesCommand = new HashSet<>();
     private Set<StudentCommand> studentCommands = new HashSet<>();
     private FacultiesCommand facultiesCommand;

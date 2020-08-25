@@ -9,17 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ResultsToResultsCommand implements Converter<Results, ResultCommand> {
-    private CoursesToCoursesCommand coursesToCoursesCommand;
-    private SessionToSessionCommand sessionToSessionCommand;
-    private StudentsToStudentsCommand studentsToStudentsCommand;
 
-    public ResultsToResultsCommand(CoursesToCoursesCommand coursesToCoursesCommand,
-                                   StudentsToStudentsCommand studentsToStudentsCommand,
-                                   SessionToSessionCommand sessionToSessionCommand) {
-        this.coursesToCoursesCommand = coursesToCoursesCommand;
-        this.sessionToSessionCommand = sessionToSessionCommand;
-        this.studentsToStudentsCommand = studentsToStudentsCommand;
-    }
 
     @Synchronized
     @Nullable
@@ -30,12 +20,21 @@ public class ResultsToResultsCommand implements Converter<Results, ResultCommand
         }
 
         ResultCommand resultCommand = new ResultCommand();
-        resultCommand.setCoursesCommand(coursesToCoursesCommand.convert(results.getCourse()));
+        resultCommand.setId(results.getId());
+        if (results.getCourse() != null ){
+            resultCommand.setCourseId(results.getCourse().getId());
+        }
         resultCommand.setExamScore(results.getExamScore());
-        resultCommand.setSessionCommand(sessionToSessionCommand.convert(results.getSession()));
+
+        if (results.getSession() != null)
+            resultCommand.setSessionId(results.getSession().getId());
+
         resultCommand.setTestScore(results.getTestScore());
         resultCommand.setGrade(results.getGrade());
-        resultCommand.setStudentCommand(studentsToStudentsCommand.convert(results.getStudent()));
+
+        if (results.getStudent() != null)
+            resultCommand.setStudentId(results.getStudent().getId());
+
         resultCommand.setId(results.getId());
         return resultCommand;
     }

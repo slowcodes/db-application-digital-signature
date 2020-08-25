@@ -39,4 +39,10 @@ public class Courses extends BaseEntity {
         this.credits = credits;
         this.serviceDepartment = serviceDepartment;
     }
+
+    public Courses addResult(Results results) {
+        results.setCourse(this);
+        this.results.add(results);
+        return this;
+    }
 }

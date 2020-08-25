@@ -1,8 +1,9 @@
 package ng.com.bitsystems.digitalsignature.repository;
 
+import ng.com.bitsystems.digitalsignature.model.PrivateKeys;
 import org.springframework.data.repository.CrudRepository;
 
-import java.security.PrivateKey;
 
-public interface PrivateKeyRepository extends CrudRepository<PrivateKey, Long> {
+
+public interface PrivateKeyRepository extends CrudRepository<PrivateKeys, Long> {
 }

@@ -38,4 +38,10 @@ public class Departments extends BaseEntity {
             this.courses = courses;
         }
     }
+
+    public Departments addCourse(Courses courses) {
+        courses.setServiceDepartment(this);
+        this.courses.add(courses);
+        return this;
+    }
 }

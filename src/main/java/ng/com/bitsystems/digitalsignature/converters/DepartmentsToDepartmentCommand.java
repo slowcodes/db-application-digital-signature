@@ -10,15 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class DepartmentsToDepartmentCommand implements Converter<Departments, DepartmentCommand> {
     private CoursesToCoursesCommand coursesToCoursesCommand;
-    private DepartmentsToDepartmentCommand departmentsToDepartmentCommand;
-    private FacultiesToFacultiesCommand facultiesToFacultiesCommand;
 
-    public DepartmentsToDepartmentCommand(CoursesToCoursesCommand coursesToCoursesCommand,
-                                          DepartmentsToDepartmentCommand departmentsToDepartmentCommand,
-                                          FacultiesToFacultiesCommand facultiesToFacultiesCommand) {
+    public DepartmentsToDepartmentCommand(CoursesToCoursesCommand coursesToCoursesCommand) {
         this.coursesToCoursesCommand = coursesToCoursesCommand;
-        this.departmentsToDepartmentCommand = departmentsToDepartmentCommand;
-        this.facultiesToFacultiesCommand = facultiesToFacultiesCommand;
+
     }
 
     @Synchronized
@@ -35,7 +30,9 @@ public class DepartmentsToDepartmentCommand implements Converter<Departments, De
             departments.getCourses().forEach(courses -> departmentCommand.getCoursesCommand().add(coursesToCoursesCommand.convert(courses)));
 
         departmentCommand.setDepartment(departments.getDepartment());
-        departmentCommand.setFacultiesCommand(facultiesToFacultiesCommand.convert(departments.getFaculty()));
+        if(departments.getFaculty() !=null){
+            departmentCommand.setFacultiesId(departments.getFaculty().getId());
+        }
         return departmentCommand;
     }
 

@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SessionCommandToSession implements Converter<SessionCommand, Sessions> {
-    private ResultsCommandToResults resultsCommandToResults;
-
-    public SessionCommandToSession(ResultsCommandToResults resultsCommandToResults) {
-        this.resultsCommandToResults = resultsCommandToResults;
-    }
+//    private ResultsCommandToResults resultsCommandToResults;
+//
+//    public SessionCommandToSession(ResultsCommandToResults resultsCommandToResults) {
+//        this.resultsCommandToResults = resultsCommandToResults;
+//    }
 
     @Synchronized
     @Nullable
@@ -26,8 +26,8 @@ public class SessionCommandToSession implements Converter<SessionCommand, Sessio
         Sessions sessions = new Sessions();
         sessions.setDescription(sessionCommand.getDescription());
 
-        if(sessionCommand.getResultCommands().size()>0 && sessionCommand.getResultCommands() != null)
-            sessionCommand.getResultCommands().forEach(resultCommand -> sessions.getResults().add(resultsCommandToResults.convert(resultCommand)));
+//        if(sessionCommand.getResultCommands().size()>0 && sessionCommand.getResultCommands() != null)
+//            sessionCommand.getResultCommands().forEach(resultCommand -> sessions.getResults().add(resultsCommandToResults.convert(resultCommand)));
 
         sessions.setSession(sessionCommand.getSession());
         sessions.setId(sessionCommand.getId());

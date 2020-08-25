@@ -10,17 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UsersToUsersCommand implements Converter<Users, UsersCommand> {
 
-    private UsersPrivilegeToUsersPrivilegeCommand usersPrivilegeToUsersPrivilegeCommand;
-    private PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand;
-    private UploadsToUploadCommmand uploadsToUploadCommmand;
-
-    public UsersToUsersCommand(UsersPrivilegeToUsersPrivilegeCommand usersPrivilegeToUsersPrivilegeCommand,
-                               PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand,
-                               UploadsToUploadCommmand uploadsToUploadCommmand) {
-        this.publicKeysToPublicKeysCommand = publicKeysToPublicKeysCommand;
-        this.uploadsToUploadCommmand = uploadsToUploadCommmand;
-        this.usersPrivilegeToUsersPrivilegeCommand = usersPrivilegeToUsersPrivilegeCommand;
-    }
 
     @Synchronized
     @Nullable
@@ -34,14 +23,9 @@ public class UsersToUsersCommand implements Converter<Users, UsersCommand> {
         usersCommand.setFirstName(users.getFirstName());
         usersCommand.setLastName(users.getLastName());
 
-        if(users.getUploads().size()>0 && users.getUploads() != null)
-            users.getUploads().forEach(upload -> usersCommand.getUploadCommands().add(uploadsToUploadCommmand.convert(upload)));
 
-        if (users.getPublicKeys().size()>0 && users.getPublicKeys() != null)
-            users.getPublicKeys().forEach(publicKeys -> usersCommand.getPublicKeyCommands().add(publicKeysToPublicKeysCommand.convert(publicKeys)));
-
-        if(users.getUsersPrivileges().size()>0 && users.getUsersPrivileges() != null)
-            users.getUsersPrivileges().forEach(usersPrivileges -> usersCommand.getUserPrivilegeCommands().add(usersPrivilegeToUsersPrivilegeCommand.convert(usersPrivileges)));
+//        if(users.getUsersPrivileges().size()>0 && users.getUsersPrivileges() != null)
+//            users.getUsersPrivileges().forEach(usersPrivileges -> usersCommand.getUserPrivilegeCommands().add(usersPrivilegeToUsersPrivilegeCommand.convert(usersPrivileges)));
 
         usersCommand.setSex(users.getSex());
         usersCommand.setId(users.getId());

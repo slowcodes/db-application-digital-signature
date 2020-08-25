@@ -29,4 +29,10 @@ public class Faculties extends BaseEntity {
             this.departments = departments;
         }
     }
+
+    public Faculties addDepartment(Departments departments) {
+        departments.setFaculty(this);
+        this.departments.add(departments);
+        return this;
+    }
 }

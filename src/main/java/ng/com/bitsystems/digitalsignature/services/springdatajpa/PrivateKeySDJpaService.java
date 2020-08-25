@@ -1,10 +1,10 @@
 package ng.com.bitsystems.digitalsignature.services.springdatajpa;
 
+import ng.com.bitsystems.digitalsignature.model.PrivateKeys;
 import ng.com.bitsystems.digitalsignature.repository.PrivateKeyRepository;
 import ng.com.bitsystems.digitalsignature.services.PrivateKeyService;
 import org.springframework.stereotype.Service;
 
-import java.security.PrivateKey;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,24 +17,24 @@ public class PrivateKeySDJpaService implements PrivateKeyService {
     }
 
     @Override
-    public Set<PrivateKey> findAll() {
-        Set<PrivateKey> privateKeys = new HashSet<>();
+    public Set<PrivateKeys> findAll() {
+        Set<PrivateKeys> privateKeys = new HashSet<>();
         privateKeyRepository.findAll().forEach(privateKeys::add);
         return privateKeys;
     }
 
     @Override
-    public PrivateKey findByID(Long aLong) {
+    public PrivateKeys findByID(Long aLong) {
         return privateKeyRepository.findById(aLong).get();
     }
 
     @Override
-    public PrivateKey add(PrivateKey object) {
+    public PrivateKeys add(PrivateKeys object) {
         return privateKeyRepository.save(object);
     }
 
     @Override
-    public void delete(PrivateKey object) {
+    public void delete(PrivateKeys object) {
         privateKeyRepository.delete(object);
     }
 

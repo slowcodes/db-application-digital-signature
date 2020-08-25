@@ -29,10 +29,13 @@ public class StudentsCommandToStudents implements Converter<StudentCommand, Stud
     @Nullable
     @Override
     public Students convert(StudentCommand studentCommand) {
+
         if(studentCommand == null)
             return null;
 
         final Students students = new Students();
+
+        students.setId(studentCommand.getId());
         students.setCounty(countiesCommandToCounties.convert(studentCommand.getCountiesCommand()));
         students.setDepartment(departmentCommandToDepartment.convert(studentCommand.getDepartmentCommand()));
         students.setMatricNumber(studentCommand.getMatricNumber());
@@ -40,12 +43,15 @@ public class StudentsCommandToStudents implements Converter<StudentCommand, Stud
         if(studentCommand.getPublicKeyCommands().size()>0 && studentCommand.getPublicKeyCommands() != null){
             studentCommand.getPublicKeyCommands().forEach(publicKeyCommand -> students.getPublicKeys().add(publicKeysCommandToPublicKeys.convert(publicKeyCommand)));
         }
+
         students.setFirstName(studentCommand.getFirstName());
         students.setFirstName(studentCommand.getFirstName());
         students.setSex(studentCommand.getSex());
 
-        if(studentCommand.getResultCommands().size()>0 && studentCommand.getResultCommands() != null)
+        if(studentCommand.getResultCommands().size()>0 && studentCommand.getResultCommands() != null) {
             studentCommand.getResultCommands().forEach(resultCommand -> students.getResults().add(resultsCommandToResults.convert(resultCommand)));
+        }
+
         return students;
     }
 }

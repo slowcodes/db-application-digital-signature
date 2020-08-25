@@ -19,7 +19,7 @@ public class AccountHolders extends Person {
     @Builder
     public AccountHolders(Long id, String username, String password, String email){
         //super(id);
-        this.username = username;
+        //this.username = username;
         this.password = password;
         this.email = email;
     }

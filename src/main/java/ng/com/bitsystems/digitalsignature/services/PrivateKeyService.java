@@ -1,6 +1,7 @@
 package ng.com.bitsystems.digitalsignature.services;
 
-import java.security.PrivateKey;
 
-public interface PrivateKeyService extends CrudService<PrivateKey, Long> {
+import ng.com.bitsystems.digitalsignature.model.PrivateKeys;
+
+public interface PrivateKeyService extends CrudService<PrivateKeys, Long> {
 }

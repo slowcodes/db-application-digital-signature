@@ -4,9 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -21,6 +22,6 @@ public class Counties extends BaseEntity {
     @JoinColumn(name = "states_id")
     private States state;
 
-    @OneToMany(mappedBy = "county")
-    private Set<Students> students = new HashSet<>();
+//    @OneToMany(mappedBy = "county")
+//    private Set<Students> students = new HashSet<>();
 }

@@ -21,4 +21,10 @@ public class States extends BaseEntity{
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "state")
     private Set<Counties> lgas = new HashSet<>();
+
+    public States addCounties(Counties counties){
+        counties.setState(this);
+        this.lgas.add(counties);
+        return this;
+    }
 }

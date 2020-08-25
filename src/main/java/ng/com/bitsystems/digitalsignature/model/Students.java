@@ -19,7 +19,7 @@ public class Students extends Person {
     private String matricNumber;
 
     @ManyToOne
-    @JoinColumn(name = "students")
+    @JoinColumn(name = "counties_id")
     private Counties county;
 
     @ManyToOne

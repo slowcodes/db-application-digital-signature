@@ -11,12 +11,11 @@ import org.springframework.stereotype.Component;
 public class PrivateKeysToPrivateKeysCommand implements Converter<PrivateKeys, PrivateKeyCommand> {
 
     private UsersToUsersCommand usersToUsersCommand;
-    private UploadsToUploadCommmand uploadsToUploadCommmand;
     private PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand;
 
-    public PrivateKeysToPrivateKeysCommand(UsersToUsersCommand usersToUsersCommand, UploadsToUploadCommmand uploadsToUploadCommmand, PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand) {
+    public PrivateKeysToPrivateKeysCommand(UsersToUsersCommand usersToUsersCommand,
+                                           PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand) {
         this.usersToUsersCommand = usersToUsersCommand;
-        this.uploadsToUploadCommmand = uploadsToUploadCommmand;
         this.publicKeysToPublicKeysCommand = publicKeysToPublicKeysCommand;
     }
 
