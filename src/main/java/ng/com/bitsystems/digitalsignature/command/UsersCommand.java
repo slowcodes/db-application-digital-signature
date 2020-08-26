@@ -14,6 +14,7 @@ public class UsersCommand {
     private String email;
     private String sex;
     private String password;
+    private String username;
 //    private Set<UserPrivilegeCommand> userPrivilegeCommands = new HashSet<>();
 //    private Set<UploadCommand> uploadCommands = new HashSet<>();
 //    private Set<PublicKeyCommand> publicKeyCommands = new HashSet<>();

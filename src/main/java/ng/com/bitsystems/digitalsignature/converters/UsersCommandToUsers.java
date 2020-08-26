@@ -21,8 +21,10 @@ public class UsersCommandToUsers implements Converter<UsersCommand, Users> {
         Users users = new Users();
         users.setEmail(usersCommand.getEmail());
         users.setId(usersCommand.getId());
-        users.setPassword(users.getPassword());
-        users.setUsername(users.getUsername());
+        users.setPassword(usersCommand.getPassword());
+        users.setUsername(usersCommand.getUsername());
+        users.setFirstName(usersCommand.getFirstName());
+        users.setLastName(usersCommand.getLastName());
         return users;
     }
 }

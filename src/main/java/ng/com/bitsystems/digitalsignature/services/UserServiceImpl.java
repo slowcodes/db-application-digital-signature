@@ -63,6 +63,9 @@ public class UserServiceImpl implements UsersService{
     @Override
     @Transactional
     public UsersCommand addUserCommand(UsersCommand usersCommand) {
-        return null;
+        Users detachedUser = usersCommandToUsers.convert(usersCommand);
+        Users savedUser = usersRepository.save(detachedUser);
+        log.info("New user has been saved");
+        return usersToUsersCommand.convert(savedUser);
     }
 }

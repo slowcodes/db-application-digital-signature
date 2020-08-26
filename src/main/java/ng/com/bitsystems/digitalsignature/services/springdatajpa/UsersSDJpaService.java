@@ -1,5 +1,6 @@
 package ng.com.bitsystems.digitalsignature.services.springdatajpa;
 
+import ng.com.bitsystems.digitalsignature.command.UsersCommand;
 import ng.com.bitsystems.digitalsignature.model.Users;
 import ng.com.bitsystems.digitalsignature.repository.UsersRepository;
 import ng.com.bitsystems.digitalsignature.services.UsersService;
@@ -11,6 +12,16 @@ import java.util.Set;
 @Service
 public class UsersSDJpaService implements UsersService {
     private UsersRepository usersRepository;
+
+    @Override
+    public UsersCommand findCommandById(Long l) {
+        return null;
+    }
+
+    @Override
+    public UsersCommand addUserCommand(UsersCommand usersCommand) {
+        return null;
+    }
 
     public UsersSDJpaService(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;

@@ -23,10 +23,9 @@ public class UserController {
         return "pages/register";
     }
 
-    @RequestMapping({"/addUser"})
+    @RequestMapping({"/adduser"})
     public String addUser(@ModelAttribute UsersCommand userCommand){
         UsersCommand usersCommand = usersService.addUserCommand(userCommand);
-        return "";
+        return "redirect:/";
     }
-
 }
