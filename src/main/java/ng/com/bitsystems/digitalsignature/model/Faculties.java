@@ -20,6 +20,7 @@ public class Faculties extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty")
     private Set<Departments> departments = new HashSet<>();
 
+
     @Builder
     public Faculties(Long id, String faculty, Set<Departments> departments){
         super(id);
@@ -28,6 +29,12 @@ public class Faculties extends BaseEntity {
         if(departments != null){
             this.departments = departments;
         }
+    }
+
+    @Builder
+    public Faculties(String faculty){
+        super();
+        this.faculty =faculty;
     }
 
     public Faculties addDepartment(Departments departments) {

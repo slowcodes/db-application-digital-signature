@@ -22,7 +22,7 @@ public class Courses extends BaseEntity {
     private Integer credits;
 
     @ManyToOne
-    @JoinColumn(name = "courses")
+    @JoinColumn(name = "department_id")
     private Departments serviceDepartment;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
@@ -34,6 +34,16 @@ public class Courses extends BaseEntity {
     @Builder
     public Courses(Long id, String courseCode, String courseTitle, Integer credits, Departments serviceDepartment){
         super(id);
+        this.courseCode = courseCode;
+        this.courseTitle = courseTitle;
+        this.credits = credits;
+        this.serviceDepartment = serviceDepartment;
+    }
+
+
+    @Builder
+    public Courses(String courseCode, String courseTitle, Integer credits, Departments serviceDepartment){
+        super();
         this.courseCode = courseCode;
         this.courseTitle = courseTitle;
         this.credits = credits;

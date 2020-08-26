@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Digital Signature Result Processor :: Upload Result</title>
+        <title>Digital Signature Result Processor :: Add Key</title>
         <link href="../../css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -57,7 +56,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/dashboard/upload/">Upload Results</a>
                                     <a class="nav-link" href="/dashboard/enter/">Enter Results</a>
-                                    <a class="nav-link" href="/dashboard/enter/">View Result</a>
+                                    <a class="nav-link" href="/dashboard/veiwresults/">View Result</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -113,64 +112,63 @@
                     <div class="container-fluid">
                         <h4 class="mt-4"><!--Upload Result--></h4>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Upload Results</li>
+                            <li class="breadcrumb-item"><a href="#">Users</a></li>
+                            <li class="breadcrumb-item active">Users</li>
                         </ol>
-                        <div class="row">
                             <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-table mr-1"></i>
+                                </div>
                                 <div class="card-body">
-                                    Use encryption keys to digitally sign and upload results. By digitally signing your
-                                    <code> results</code> and
-                                    <code>activities </code>
-                                    You will be providing an additional layer of security to protect your data.
-                                    <code>acessible</code>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Email</th>
+                                                    <th>View</th>
+                                                    <th>Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Email</th>
+                                                    <th>View</th>
+                                                    <th>Update</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+
+                                            <tr th:remove="all">
+                                                <td>CS 101</td>
+                                                <td>Introduction to computer science</td>
+                                                <td>3</td>
+                                                <td>63</td>
+                                                <td>B</td>
+                                            </tr>
+                                            <tr th:remove="all">
+                                                <td>MTH 121</td>
+                                                <td>Mathematical Methods</td>
+                                                <td>3</td>
+                                                <td>73</td>
+                                                <td>A</td>
+                                            </tr>
+                                            <tr th:each="user :${users}">
+                                                <td th:text="${user.firstName}">MTH 141</td>
+                                                <td th:text="${user.lastName}">Ordinary Diffrential Equations</td>
+                                                <td th:text="${user.email}">2</td>
+                                                <td><a href="#" th:href="@{'/users/' + ${user.id} +'/update'}">Update</a> </td>
+                                                <td><a href="#" th:href="@{'/users/' +${user.id} +'/show'}">View</a> </td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-8 order-md-1">
-                                <form class="needs-validation" novalidate>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="country">Department</label>
-                                            <select class="custom-select d-block w-100" id="country" required>
-                                                <option value="">Choose...</option>
-                                                <option>Computer Science</option>
-                                                <option>Mathematics</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select a valid country.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="state">Session</label>
-                                            <select class="custom-select d-block w-100" id="state" required>
-                                                <option value="">Choose...</option>
-                                                <option>2019/2020</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please provide a valid session.
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="mb-3">
-                                        <label for="address2">Upload Result <span class="text-muted">(.csv format)</span></label>
-                                        <input type="file" class="form-control" id="address2" placeholder="Apartment or suite">
-                                    </div>
-
-
-                                    <hr class="mb-4">
-                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Process upload</button>
-                                </form>
-                            </div>
-                            <div class="col-md-4 order-md-2 mb-4">
-                                <b>Key in Use (Tag):</b>comphy
-                                <button class="btn btn-warning btn-lg btn-block" type="button">Create new encryption keys</button>
-                                <button class="btn btn-success btn-lg btn-block" type="button">Use existing keys</button>
-                                <button class="btn btn-danger btn-lg btn-block" type="button">Do not use encryption keys</button>
-                            </div>
-                        </div>
 
 
                     </div>
@@ -193,6 +191,5 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../../js/scripts.js"></script>
-        <script src="../../js/papaparse.js" />
     </body>
 </html>

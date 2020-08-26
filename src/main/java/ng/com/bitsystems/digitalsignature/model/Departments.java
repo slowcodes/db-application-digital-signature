@@ -30,8 +30,18 @@ public class Departments extends BaseEntity {
     private Set<Students> students = new HashSet<>();
 
     @Builder
-    public Departments(Long id, String department, Faculties faculty, Set<Courses> courses){
-        super(id);
+    public Departments(String department, Faculties faculty, Set<Courses> courses){
+        super();
+        this.department = department;
+        this.faculty = faculty;
+        if(courses != null){
+            this.courses = courses;
+        }
+    }
+
+    @Builder
+    public Departments(String department, Faculties faculty){
+        super();
         this.department = department;
         this.faculty = faculty;
         if(courses != null){

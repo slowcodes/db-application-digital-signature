@@ -1,9 +1,6 @@
 package ng.com.bitsystems.digitalsignature.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -31,4 +28,17 @@ public class Students extends Person {
 
     @ManyToMany(mappedBy = "students")
     private Set<PublicKeys> publicKeys = new HashSet<>();
+
+    @Builder
+    public Students(String firstName, String lastName, String sex,
+                    String matricNumber, Departments departments, Counties county){
+
+        super.setFirstName(firstName);
+        super.setLastName(lastName);
+        super.setSex(sex);
+        this.matricNumber = matricNumber;
+        this.department = departments;
+        this.county = county;
+
+    }
 }

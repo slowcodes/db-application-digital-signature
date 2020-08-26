@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Digital Signature Result Processor :: Register</title>
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
@@ -23,7 +23,7 @@
 
                                         <!--/*@thymesVar id="users" type="ng.com.bitsystems.digitalsignature.model.Users"*/-->
                                         <form th:object="${users}" th:action="@{'/adduser'}" method="post">
-
+                                            <input type="hidden" th:field="*{id}" >
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
