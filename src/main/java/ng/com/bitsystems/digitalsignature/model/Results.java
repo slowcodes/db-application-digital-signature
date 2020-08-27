@@ -15,7 +15,6 @@ public class Results extends BaseEntity {
 
     private Double testScore;
     private Double examScore;
-    private Character grade;
     private Double totalScore;
 
     @ManyToOne
