@@ -5,3 +5,8 @@ INSERT INTO USERS(first_name,last_name,email,sex,password,username) VALUES ('Ada
 INSERT INTO USERS(first_name,last_name,email,sex,password,username) VALUES ('Charles', 'Ivy', 'charles.ivy@uni-abu.gh','Female', '@Services#','ivyrose')
 
 
+INSERT INTO SESSIONS(session) VALUES ('2009/2010')
+INSERT INTO SESSIONS(session) VALUES ('2010/2011')
+INSERT INTO SESSIONS(session) VALUES ('2011/2012')
+INSERT INTO SESSIONS(session) VALUES ('2012/2013')
+INSERT INTO SESSIONS(session) VALUES ('2013/2014')

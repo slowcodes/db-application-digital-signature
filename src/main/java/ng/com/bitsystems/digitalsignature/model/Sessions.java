@@ -19,7 +19,7 @@ public class Sessions extends BaseEntity {
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "session")
-    private Set<Results> results = new HashSet<>();
+    private Set<Uploads> uploads = new HashSet<>();
 
     @Builder
     public Sessions(Long id, String session){
@@ -27,9 +27,4 @@ public class Sessions extends BaseEntity {
         this.session = session;
     }
 
-    public Sessions addResult(Results results) {
-        results.setSession(this);
-        this.results.add(results);
-        return this;
-    }
 }

@@ -22,6 +22,10 @@ public class Uploads extends BaseEntity {
     private LocalDate uploadedOn;
 
     @ManyToOne
+    @JoinColumn(name = "sessions_id")
+    private Sessions session;
+
+    @ManyToOne
     @JoinColumn(name = "courses_id")
     private Courses course;
 
@@ -33,4 +37,10 @@ public class Uploads extends BaseEntity {
 
     @OneToOne
     private PublicKeys publicKeys;
+
+    public Uploads addResult(Results results) {
+        results.setUpload(this);
+        this.results.add(results);
+        return this;
+    }
 }

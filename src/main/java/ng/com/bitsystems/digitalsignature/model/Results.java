@@ -22,15 +22,6 @@ public class Results extends BaseEntity {
     private Students student;
 
     @ManyToOne
-    @JoinColumn(name = "sessions_id")
-    private Sessions session;
-
-    @ManyToOne
-    @JoinColumn(name = "courses_id")
-    private Courses course;
-
-
-    @ManyToOne
     @JoinColumn(name = "uploads_id")
     private Uploads upload;
 
@@ -39,8 +30,6 @@ public class Results extends BaseEntity {
     public Results(Long id, Students students, Sessions session, Courses course, Double testScore, Double examScore ){
         super(id);
         this.student = students;
-        this.course = course;
-        this.session = session;
         this.totalScore = testScore + examScore;
     }
 }

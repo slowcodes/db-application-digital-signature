@@ -21,16 +21,16 @@ public class ResultsToResultsCommand implements Converter<Results, ResultCommand
 
         ResultCommand resultCommand = new ResultCommand();
         resultCommand.setId(results.getId());
-        if (results.getCourse() != null ){
-            resultCommand.setCourseId(results.getCourse().getId());
-        }
+//        if (results.getCourse() != null ){
+//            resultCommand.setCourseId(results.getCourse().getId());
+//        }
         resultCommand.setExamScore(results.getExamScore());
 
-        if (results.getSession() != null)
-            resultCommand.setSessionId(results.getSession().getId());
+//        if (results.getSession() != null)
+//            resultCommand.setSessionId(results.getSession().getId());
+//        resultCommand.s
 
         resultCommand.setTestScore(results.getTestScore());
-        resultCommand.setGrade(results.getGrade());
 
         if (results.getStudent() != null)
             resultCommand.setStudentId(results.getStudent().getId());

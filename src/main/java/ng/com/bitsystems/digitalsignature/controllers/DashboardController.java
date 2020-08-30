@@ -1,5 +1,6 @@
 package ng.com.bitsystems.digitalsignature.controllers;
 
+import ng.com.bitsystems.digitalsignature.command.UploadCommand;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,13 +13,9 @@ public class DashboardController {
         return "pages/index.html";
     }
 
-    @RequestMapping({"/dashboard/upload/"})
-    public String upload(Model model){
-        return "pages/upload.html";
-    }
-
     @RequestMapping({"/dashboard/enter/"})
     public String addresult(Model model){
+        model.addAttribute("model", new UploadCommand());
         return "pages/enter.html";
     }
 

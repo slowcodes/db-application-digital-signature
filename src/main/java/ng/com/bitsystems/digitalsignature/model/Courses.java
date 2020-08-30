@@ -26,9 +26,6 @@ public class Courses extends BaseEntity {
     private Departments serviceDepartment;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private Set<Results> results = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private Set<Uploads> uploads = new HashSet<>();
 
     @Builder
@@ -50,9 +47,5 @@ public class Courses extends BaseEntity {
         this.serviceDepartment = serviceDepartment;
     }
 
-    public Courses addResult(Results results) {
-        results.setCourse(this);
-        this.results.add(results);
-        return this;
-    }
+
 }

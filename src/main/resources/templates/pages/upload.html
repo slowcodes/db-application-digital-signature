@@ -123,47 +123,63 @@
                                     <code> results</code> and
                                     <code>activities </code>
                                     You will be providing an additional layer of security to protect your data.
-                                    <code>acessible</code>
+                                    <code>accessible</code>
                                 </div>
                             </div>
 
                             <div class="col-md-8 order-md-1">
 
-                                <!--/*@thymesVar id="users" type="ng.com.bitsystems.digitalsignature.model.Sessions"*/-->
-                                <form class="needs-validation" novalidate action="#" id="result-form">
+                                <!--/*@thymesVar id="upload" type="ng.com.bitsystems.digitalsignature.model.Uploads"*/-->
+                                <!--/*@thymesVar id="sessions" type="ng.com.bitsystems.digitalsignature.model.Sessions"*/-->
+                                <!--/*@thymesVar id="departments" type="ng.com.bitsystems.digitalsignature.model.Departments"*/-->
+                                <form th:object="${upload}" th:action="@{'/result/process_upload/'}" method="post" class="needs-validation" enctype="multipart/form-data" novalidate  id="result-form">
+                                    <input type="hidden" th:field="*{id}" >
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="country">Department</label>
-                                            <select class="custom-select d-block w-100" id="country" required>
-                                                <option value="">Choose...</option>
-                                                <option>Computer Science</option>
-                                                <option>Mathematics</option>
-                                            </select>
+                                            <div th:if="${departments != null and not #lists.isEmpty(departments)}">
+                                                <label for="department">Department</label>
+                                                <select class="custom-select d-block w-100" id="department" th:field="*{coursesCommand.id}" required>
+                                                    <option value="">Choose...</option>
+                                                    <option th:each="department : ${departments}"
+                                                            th:value="${department.id}"
+                                                            th:text="${department.department}" />
+                                                </select>
+                                            </div>
                                             <div class="invalid-feedback">
-                                                Please select a valid country.
+                                                Please select a valid a department.
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="state">Session</label>
-                                            <select class="custom-select d-block w-100" id="state" th:field="*{id}" required>
-                                                <option value="">Choose...</option>
-                                                <option>2019/2020</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please provide a valid session.
+                                            <div th:if="${sessions != null and not #lists.isEmpty(sessions)}">
+                                                <label for="state">Session</label>
+                                                <select class="custom-select d-block w-100" id="state" required th:field="*{sessionCommand.id}">
+                                                    <option value="">Choose...</option>
+                                                    <option th:each="academic_session : ${sessions}"
+                                                            th:value="${academic_session.id}"
+                                                            th:text="${academic_session.session}" />
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid session.
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="file">Upload Result <span class="text-muted">(.csv format)</span></label>
+                                            <input type="file" class="form-control" accept=".csv" id="file" name="file" placeholder="Result File" required>
+                                        </div>
 
-                                    <div class="mb-3">
-                                        <label for="files">Upload Result <span class="text-muted">(.csv format)</span></label>
-                                        <input type="file" class="form-control" accept=".csv" id="files" placeholder="Result File" required>
+                                        <div class="col-md-6">
+                                            <label for="upload-file">View .csv file before uploading <span class="text-muted">(.csv format)</span></label>
+                                            <button class="btn btn-primary  btn-block" type="button" id="upload-file">Process upload</button>
+                                        </div>
                                     </div>
 
                                     <div id="parsed_csv_list"></div>
                                     <hr class="mb-4">
-                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Process upload</button>
+                                    <button class="btn btn-success btn-lg btn-block" type="submit">Process upload</button>
                                 </form>
 
                             </div>
@@ -272,7 +288,7 @@
                 $("#parsed_csv_list").html(table);
             }
 
-            $("#result-form").submit(function(e){
+            $("#upload-file").click(function(e){
                 e.preventDefault();
                 $('#files').parse({
                     config: {

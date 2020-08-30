@@ -17,6 +17,7 @@ public class UploadCommand {
     private LocalDate dateOfUpload;
     private UsersCommand usersCommand;
     private CoursesCommand coursesCommand;
+    private SessionCommand sessionCommand;
     private Set<ResultCommand> resultCommand = new HashSet<>();
     private PrivateKeyCommand privateKeyCommand;
     private PublicKeyCommand publicKeyCommand;
