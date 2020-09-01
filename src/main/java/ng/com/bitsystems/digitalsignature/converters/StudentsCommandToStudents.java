@@ -13,16 +13,13 @@ public class StudentsCommandToStudents implements Converter<StudentCommand, Stud
     private CountiesCommandToCounties countiesCommandToCounties;
     private DepartmentCommandToDepartment departmentCommandToDepartment;
     private PublicKeysCommandToPublicKeys publicKeysCommandToPublicKeys;
-    private ResultsCommandToResults resultsCommandToResults;
 
     public StudentsCommandToStudents(CountiesCommandToCounties countiesCommandToCounties,
                                      DepartmentCommandToDepartment departmentCommandToDepartment,
-                                     PublicKeysCommandToPublicKeys publicKeysCommandToPublicKeys,
-                                     ResultsCommandToResults resultsCommandToResults) {
+                                     PublicKeysCommandToPublicKeys publicKeysCommandToPublicKeys) {
         this.countiesCommandToCounties = countiesCommandToCounties;
         this.departmentCommandToDepartment = departmentCommandToDepartment;
         this.publicKeysCommandToPublicKeys = publicKeysCommandToPublicKeys;
-        this.resultsCommandToResults = resultsCommandToResults;
     }
 
     @Synchronized
@@ -48,9 +45,9 @@ public class StudentsCommandToStudents implements Converter<StudentCommand, Stud
         students.setFirstName(studentCommand.getFirstName());
         students.setSex(studentCommand.getSex());
 
-        if(studentCommand.getResultCommands().size()>0 && studentCommand.getResultCommands() != null) {
-            studentCommand.getResultCommands().forEach(resultCommand -> students.getResults().add(resultsCommandToResults.convert(resultCommand)));
-        }
+//        if(studentCommand.getResultCommands().size()>0 && studentCommand.getResultCommands() != null) {
+//            studentCommand.getResultCommands().forEach(resultCommand -> students.getResults().add(resultsCommandToResults.convert(resultCommand)));
+//        }
 
         return students;
     }

@@ -11,7 +11,7 @@ import lombok.Setter;
 public class ResultCommand {
     private Double testScore;
     private Double examScore;
-    private Long studentId;
+    private StudentCommand studentCommand;
     private UploadCommand uploadCommand;
     private Long id;
 }

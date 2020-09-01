@@ -21,6 +21,7 @@ public class CoursesCommandToCourses implements Converter<CoursesCommand, Course
             return null;
         }
         Courses courses = new Courses();
+        courses.setId(coursesCommand.getId());
         courses.setCourseCode(coursesCommand.getCourseCode());
         courses.setCourseTitle(coursesCommand.getCourseTitle());
         courses.setCredits(courses.getCredits());

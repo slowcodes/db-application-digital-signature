@@ -131,18 +131,18 @@
 
                                 <!--/*@thymesVar id="upload" type="ng.com.bitsystems.digitalsignature.model.Uploads"*/-->
                                 <!--/*@thymesVar id="sessions" type="ng.com.bitsystems.digitalsignature.model.Sessions"*/-->
-                                <!--/*@thymesVar id="departments" type="ng.com.bitsystems.digitalsignature.model.Departments"*/-->
+                                <!--/*@thymesVar id="courses" type="ng.com.bitsystems.digitalsignature.model.courses"*/-->
                                 <form th:object="${upload}" th:action="@{'/result/process_upload/'}" method="post" class="needs-validation" enctype="multipart/form-data" novalidate  id="result-form">
                                     <input type="hidden" th:field="*{id}" >
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <div th:if="${departments != null and not #lists.isEmpty(departments)}">
-                                                <label for="department">Department</label>
+                                            <div th:if="${courses != null and not #lists.isEmpty(courses)}">
+                                                <label for="department">Courses</label>
                                                 <select class="custom-select d-block w-100" id="department" th:field="*{coursesCommand.id}" required>
                                                     <option value="">Choose...</option>
-                                                    <option th:each="department : ${departments}"
-                                                            th:value="${department.id}"
-                                                            th:text="${department.department}" />
+                                                    <option th:each="course : ${courses}"
+                                                            th:value="${course.id}"
+                                                            th:text="${course.courseTitle}" />
                                                 </select>
                                             </div>
                                             <div class="invalid-feedback">
@@ -253,32 +253,9 @@
                     else if (sum >= 40){
                         grade = "E";
                     }
-
-                    // switch (sum){
-                    //     case (sum >= 70):
-                    //         break;
-                    //
-                    //     case (sum >= 60):
-                    //         grade = "B";
-                    //         break;
-                    //
-                    //     case (sum >= 50):
-                    //         grade = "C";
-                    //         break;
-                    //
-                    //     case (sum >= 45):
-                    //         grade = "D";
-                    //         break;
-                    //
-                    //     case (sum >= 40):
-                    //         grade = "E";
-                    //         break;
-                    //
-                    //     case (sum < 40):
-                    //         grade = "F";
-                    //         break;
-                    // }
-
+                    else {
+                        grade = "F";
+                    }
                     table+="<td>"+ total+ "</td>";
                     table+="<td>"+ grade+ "</td>";
                     table+="<td>"+ +"<input type='hidden' v></td>";
@@ -290,7 +267,7 @@
 
             $("#upload-file").click(function(e){
                 e.preventDefault();
-                $('#files').parse({
+                $('#file').parse({
                     config: {
                         delimiter: "auto",
                         complete: displayHTMLTable,

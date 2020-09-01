@@ -43,4 +43,5 @@ public class DashboardController {
     public String students(Model model){
         return "pages/view.html";
     }
+
 }

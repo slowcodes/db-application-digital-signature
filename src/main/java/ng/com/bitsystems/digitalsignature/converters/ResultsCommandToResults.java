@@ -10,6 +10,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResultsCommandToResults implements Converter<ResultCommand, Results> {
 
+    private StudentsCommandToStudents studentsCommandToStudents;
+    private UploadCommandToUploads uploadCommandToUploads;
+
+    public ResultsCommandToResults(StudentsCommandToStudents studentsCommandToStudents, UploadCommandToUploads uploadCommandToUploads) {
+        this.studentsCommandToStudents = studentsCommandToStudents;
+        this.uploadCommandToUploads = uploadCommandToUploads;
+    }
 
     @Synchronized
     @Nullable
@@ -21,23 +28,10 @@ public class ResultsCommandToResults implements Converter<ResultCommand, Results
 
         Results results = new Results();
         results.setId(resultCommand.getId());
-
-//        if(resultCommand.getCourseId() != null){
-//            Courses courses = new Courses();
-//            courses.setId(resultCommand.getCourseId());
-//            results.setCourse(courses);
-//            courses.addResult(results);
-//        }
-
         results.setExamScore(resultCommand.getExamScore());
-//        results.setGrade(resultCommand.getGrade());
-
-//        if (resultCommand.getSessionId() != null){
-//            Sessions sessions = new Sessions();
-//            sessions.setId(resultCommand.getSessionId());
-//            results.setSession(sessions);
-//            sessions.addResult(results);
-//        }
+        results.setTestScore(resultCommand.getTestScore());
+        results.setStudent(studentsCommandToStudents.convert(resultCommand.getStudentCommand()));
+        results.setUpload(uploadCommandToUploads.convert(resultCommand.getUploadCommand()));
         return results;
     }
 }

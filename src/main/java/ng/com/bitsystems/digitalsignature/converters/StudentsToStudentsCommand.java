@@ -11,16 +11,13 @@ import org.springframework.stereotype.Component;
 public class StudentsToStudentsCommand implements Converter<Students, StudentCommand> {
 
     private DepartmentsToDepartmentCommand departmentsToDepartmentCommand;
-    private ResultsToResultsCommand resultsToResultsCommand;
     private PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand;
     private CountiesToCountiesCommand countiesToCountiesCommand;
 
     public StudentsToStudentsCommand(DepartmentsToDepartmentCommand departmentsToDepartmentCommand,
-                                     ResultsToResultsCommand resultsToResultsCommand,
                                      PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand,
                                      CountiesToCountiesCommand countiesToCountiesCommand) {
         this.departmentsToDepartmentCommand = departmentsToDepartmentCommand;
-        this.resultsToResultsCommand = resultsToResultsCommand;
         this.publicKeysToPublicKeysCommand = publicKeysToPublicKeysCommand;
         this.countiesToCountiesCommand = countiesToCountiesCommand;
     }
@@ -43,8 +40,8 @@ public class StudentsToStudentsCommand implements Converter<Students, StudentCom
         if(students.getPublicKeys().size()>0 && students.getPublicKeys() != null)
             students.getPublicKeys().forEach(publicKeys -> studentCommand.getPublicKeyCommands().add(publicKeysToPublicKeysCommand.convert(publicKeys)));
 
-        if(students.getResults().size()>0 && students.getResults() != null)
-            students.getResults().forEach(results -> studentCommand.getResultCommands().add(resultsToResultsCommand.convert(results)));
+//        if(students.getResults().size()>0 && students.getResults() != null)
+//            students.getResults().forEach(results -> studentCommand.getResultCommands().add(resultsToResultsCommand.convert(results)));
 
         studentCommand.setSex(students.getSex());
         studentCommand.setId(students.getId());

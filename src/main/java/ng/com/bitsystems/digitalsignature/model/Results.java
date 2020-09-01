@@ -15,7 +15,6 @@ public class Results extends BaseEntity {
 
     private Double testScore;
     private Double examScore;
-    private Double totalScore;
 
     @ManyToOne
     @JoinColumn(name = "students_id")
@@ -30,6 +29,5 @@ public class Results extends BaseEntity {
     public Results(Long id, Students students, Sessions session, Courses course, Double testScore, Double examScore ){
         super(id);
         this.student = students;
-        this.totalScore = testScore + examScore;
     }
 }

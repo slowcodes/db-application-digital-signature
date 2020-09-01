@@ -1,5 +1,8 @@
 package ng.com.bitsystems.digitalsignature.services.springdatajpa;
 
+import ng.com.bitsystems.digitalsignature.command.CoursesCommand;
+import ng.com.bitsystems.digitalsignature.converters.CoursesCommandToCourses;
+import ng.com.bitsystems.digitalsignature.converters.CoursesToCoursesCommand;
 import ng.com.bitsystems.digitalsignature.model.Courses;
 import ng.com.bitsystems.digitalsignature.repository.CoursesRepository;
 import ng.com.bitsystems.digitalsignature.services.CoursesServices;
@@ -11,9 +14,13 @@ import java.util.Set;
 @Service
 public class CourseSDJpaService implements CoursesServices {
     private CoursesRepository coursesRepository;
+    private CoursesToCoursesCommand coursesToCoursesCommand;
+    private CoursesCommandToCourses coursesCommandToCourses;
 
-    public CourseSDJpaService(CoursesRepository coursesRepository) {
+    public CourseSDJpaService(CoursesRepository coursesRepository, CoursesToCoursesCommand coursesToCoursesCommand, CoursesCommandToCourses coursesCommandToCourses) {
         this.coursesRepository = coursesRepository;
+        this.coursesToCoursesCommand = coursesToCoursesCommand;
+        this.coursesCommandToCourses = coursesCommandToCourses;
     }
 
     @Override
@@ -41,5 +48,10 @@ public class CourseSDJpaService implements CoursesServices {
     @Override
     public void deleteById(Long aLong) {
         coursesRepository.deleteById(aLong);
+    }
+
+    @Override
+    public CoursesCommand getCourseCommandById(Long id) {
+        return coursesToCoursesCommand.convert(findByID(id));
     }
 }

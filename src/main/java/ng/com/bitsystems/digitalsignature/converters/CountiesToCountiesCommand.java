@@ -10,13 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CountiesToCountiesCommand implements Converter<Counties, CountiesCommand> {
 
-    //private StudentsToStudentsCommand studentsToStudentsCommand;
-    //private StateToStateCommand stateToStateCommand;
-
-    public CountiesToCountiesCommand() {
-        //this.studentsToStudentsCommand = studentsToStudentsCommand;
-        //this.stateToStateCommand = stateToStateCommand;
-    }
 
     @Synchronized
     @Nullable

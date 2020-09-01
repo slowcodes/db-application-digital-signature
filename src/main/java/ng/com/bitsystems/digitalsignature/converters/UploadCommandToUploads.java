@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UploadCommandToUploads implements Converter<UploadCommand, Uploads> {
 
-    private ResultsCommandToResults resultsCommandToResults;
     private CoursesCommandToCourses coursesCommandToCourses;
     private UsersCommandToUsers usersCommandToUsers;
     private PrivateKeysCommandToPrivateKeys privateKeysCommandToPrivateKeys;
@@ -18,8 +17,7 @@ public class UploadCommandToUploads implements Converter<UploadCommand, Uploads>
     private SessionCommandToSession sessionCommandToSession;
 
     public UploadCommandToUploads(SessionCommandToSession sessionCommandToSession,
-                                  ResultsCommandToResults resultsCommandToResults, CoursesCommandToCourses coursesCommandToCourses, UsersCommandToUsers usersCommandToUsers, PrivateKeysCommandToPrivateKeys privateKeysCommandToPrivateKeys, PublicKeysCommandToPublicKeys publicKeysCommandToPublicKeys) {
-        this.resultsCommandToResults = resultsCommandToResults;
+                                  CoursesCommandToCourses coursesCommandToCourses, UsersCommandToUsers usersCommandToUsers, PrivateKeysCommandToPrivateKeys privateKeysCommandToPrivateKeys, PublicKeysCommandToPublicKeys publicKeysCommandToPublicKeys) {
         this.coursesCommandToCourses = coursesCommandToCourses;
         this.usersCommandToUsers = usersCommandToUsers;
         this.privateKeysCommandToPrivateKeys = privateKeysCommandToPrivateKeys;
@@ -41,9 +39,9 @@ public class UploadCommandToUploads implements Converter<UploadCommand, Uploads>
         uploads.setPrivateKeys(privateKeysCommandToPrivateKeys.convert(uploadCommand.getPrivateKeyCommand()));
         uploads.setPublicKeys(publicKeysCommandToPublicKeys.convert(uploadCommand.getPublicKeyCommand()));
         uploads.setSession(sessionCommandToSession.convert(uploadCommand.getSessionCommand()));
-        if(uploadCommand.getResultCommand().size()>0 && uploadCommand.getCoursesCommand() != null){
-            uploadCommand.getResultCommand().forEach(resultCommand -> uploads.getResults().add(resultsCommandToResults.convert(resultCommand)));
-        }
+//        if(uploadCommand.getResultCommand().size()>0 && uploadCommand.getCoursesCommand() != null){
+//            uploadCommand.getResultCommand().forEach(resultCommand -> uploads.getResults().add(resultsCommandToResults.convert(resultCommand)));
+//        }
         uploads.setUploadedOn(uploadCommand.getDateOfUpload());
         return uploads;
     }
