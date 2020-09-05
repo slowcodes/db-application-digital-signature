@@ -11,12 +11,9 @@ import org.springframework.stereotype.Component;
 public class PrivateKeysToPrivateKeysCommand implements Converter<PrivateKeys, PrivateKeyCommand> {
 
     private UsersToUsersCommand usersToUsersCommand;
-    private PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand;
 
-    public PrivateKeysToPrivateKeysCommand(UsersToUsersCommand usersToUsersCommand,
-                                           PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand) {
+    public PrivateKeysToPrivateKeysCommand(UsersToUsersCommand usersToUsersCommand) {
         this.usersToUsersCommand = usersToUsersCommand;
-        this.publicKeysToPublicKeysCommand = publicKeysToPublicKeysCommand;
     }
 
     @Synchronized
@@ -31,7 +28,6 @@ public class PrivateKeysToPrivateKeysCommand implements Converter<PrivateKeys, P
         privateKeyCommand.setUsersCommand(usersToUsersCommand.convert(privateKeys.getUsers()));
         privateKeyCommand.setPrivateKey(privateKeys.getPrivateKey());
         privateKeyCommand.setPassphrase(privateKeys.getPassphrase());
-       // privateKeyCommand.setPublicKeyCommand(publicKeysToPublicKeysCommand.convert(privateKeys.getPublicKeys()));
         privateKeyCommand.setUsersCommand(usersToUsersCommand.convert(privateKeys.getUsers()));
         return privateKeyCommand;
     }

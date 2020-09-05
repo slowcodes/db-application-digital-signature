@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class PublicKeys extends BaseEntity{
-    private String passphrase;
+    //private String passphrase;
     private String publickey;
 
     @ManyToMany

@@ -124,13 +124,13 @@
 <!--                            </div>-->
 
                             <div class="col-md-6 order-md-1">
-                                <!--/*@thymesVar id="pKey" type="ng.com.bitsystems.digitalsignature.model.PrivateKeys"*/-->
+                                <!--/*@thymesVar id="pKey" type="ng.com.bitsystems.digitalsignature.model.PublicKeys"*/-->
                                 <form th:object="${pKey}" class="needs-validation" th:action="@{'/addkey'}" method="post" novalidate>
                                     <input type="hidden" th:field="*{id}" >
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <label for="passphrase">Passphrase</label>
-                                            <input type="text" class="form-control" id="passphrase"  required>
+                                            <input type="text" class="form-control" id="passphrase" th:field="*{passphrase}" required>
                                             <div class="invalid-feedback">
                                                 Please select a valid passphrase.
                                             </div>
@@ -154,7 +154,7 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <label for="public-key">Public Key</label>
-                                            <input type="text" class="form-control" id="public-key"  required>
+                                            <input type="text" class="form-control" id="public-key" th:field="*{publickey}" required>
 <!--                                            <small class="text-muted">Automatically generated </small>-->
                                             <div class="invalid-feedback">
                                                 Please select a valid encryption key.
@@ -165,8 +165,8 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <label for="public-key">Private Key</label>
-                                            <input type="text" class="form-control" id="private-key" th:field="*{privateKey}" required>
-                                            <!--                                            <small class="text-muted">Automatically generated </small>-->
+<!--                                            <input type="text" class="form-control" id="private-key" th:field="*{privateKeys.privateKey}" required>-->
+                                            <!--<small class="text-muted">Automatically generated </small>-->
                                             <div class="invalid-feedback">
                                                 Please select a valid encryption key.
                                             </div>

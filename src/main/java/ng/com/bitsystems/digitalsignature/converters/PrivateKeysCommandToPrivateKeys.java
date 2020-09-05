@@ -10,12 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrivateKeysCommandToPrivateKeys implements Converter<PrivateKeyCommand, PrivateKeys> {
 
-    private PublicKeysCommandToPublicKeys publicKeysCommandToPublicKeys;
     private UsersCommandToUsers usersCommandToUsers;
 
-    public PrivateKeysCommandToPrivateKeys(PublicKeysCommandToPublicKeys publicKeysCommandToPublicKeys,
-                                            UsersCommandToUsers usersCommandToUsers) {
-        this.publicKeysCommandToPublicKeys = publicKeysCommandToPublicKeys;
+    public PrivateKeysCommandToPrivateKeys(UsersCommandToUsers usersCommandToUsers) {
         this.usersCommandToUsers = usersCommandToUsers;
     }
 
@@ -31,7 +28,6 @@ public class PrivateKeysCommandToPrivateKeys implements Converter<PrivateKeyComm
         privateKeys.setCreatedAt(privateKeyCommand.getCreatedAt());
         privateKeys.setPassphrase(privateKeyCommand.getPassphrase());
         privateKeys.setPrivateKey(privateKeyCommand.getPrivateKey());
-        //privateKeys.setPublicKeys(publicKeysCommandToPublicKeys.convert(privateKeyCommand.getPublicKeyCommand()));
         privateKeys.setUsers(usersCommandToUsers.convert(privateKeyCommand.getUsersCommand()));
         return privateKeys;
     }
