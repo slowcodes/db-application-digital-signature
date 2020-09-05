@@ -19,10 +19,7 @@ public class DashboardController {
         return "pages/enter.html";
     }
 
-    @RequestMapping("/dashboard/keys/")
-    public String publickeys(Model model){
-        return "pages/key.html";
-    }
+
 
     @RequestMapping("/dashboard/transcript/")
     public String privatekeys(Model model){

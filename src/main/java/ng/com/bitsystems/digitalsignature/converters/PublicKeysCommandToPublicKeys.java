@@ -35,7 +35,7 @@ public class PublicKeysCommandToPublicKeys implements Converter<PublicKeyCommand
             PrivateKeys privateKeys = new PrivateKeys();
             privateKeys.setId(publicKeyCommand.getPrivateKeyId());
             privateKeys.addPublicKey(publicKeys);
-            privateKeys.setPublicKeys(publicKeys);
+            //privateKeys.setPublicKeys(publicKeys);
         }
         return publicKeys;
     }

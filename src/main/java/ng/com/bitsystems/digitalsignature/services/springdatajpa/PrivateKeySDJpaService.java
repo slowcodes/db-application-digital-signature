@@ -1,5 +1,8 @@
 package ng.com.bitsystems.digitalsignature.services.springdatajpa;
 
+import ng.com.bitsystems.digitalsignature.command.PrivateKeyCommand;
+import ng.com.bitsystems.digitalsignature.converters.PrivateKeysCommandToPrivateKeys;
+import ng.com.bitsystems.digitalsignature.converters.PrivateKeysToPrivateKeysCommand;
 import ng.com.bitsystems.digitalsignature.model.PrivateKeys;
 import ng.com.bitsystems.digitalsignature.repository.PrivateKeyRepository;
 import ng.com.bitsystems.digitalsignature.services.PrivateKeyService;
@@ -11,9 +14,17 @@ import java.util.Set;
 @Service
 public class PrivateKeySDJpaService implements PrivateKeyService {
     private PrivateKeyRepository privateKeyRepository;
+    private PrivateKeysCommandToPrivateKeys privateKeysCommandToPrivateKeys;
+    private PrivateKeysToPrivateKeysCommand privateKeysToPrivateKeysCommand;
+    private UsersSDJpaService usersSDJpaService;
 
-    public PrivateKeySDJpaService(PrivateKeyRepository privateKeyRepository) {
+    public PrivateKeySDJpaService(PrivateKeyRepository privateKeyRepository, UsersSDJpaService usersSDJpaService,
+                                  PrivateKeysCommandToPrivateKeys privateKeysCommandToPrivateKeys,
+                                  PrivateKeysToPrivateKeysCommand privateKeysToPrivateKeysCommand) {
         this.privateKeyRepository = privateKeyRepository;
+        this.usersSDJpaService = usersSDJpaService;
+        this.privateKeysCommandToPrivateKeys=privateKeysCommandToPrivateKeys;
+        this.privateKeysToPrivateKeysCommand=privateKeysToPrivateKeysCommand;
     }
 
     @Override
@@ -41,5 +52,13 @@ public class PrivateKeySDJpaService implements PrivateKeyService {
     @Override
     public void deleteById(Long aLong) {
         privateKeyRepository.deleteById(aLong);
+    }
+
+    @Override
+    public PrivateKeyCommand add(PrivateKeyCommand privateKeyCommand) {
+        PrivateKeys privateKeys = privateKeysCommandToPrivateKeys.convert(privateKeyCommand);
+        privateKeys.setUsers(usersSDJpaService.findByID(new Long(1)));
+        PrivateKeys savedKey = privateKeyRepository.save(privateKeys);
+        return privateKeysToPrivateKeysCommand.convert(savedKey);
     }
 }

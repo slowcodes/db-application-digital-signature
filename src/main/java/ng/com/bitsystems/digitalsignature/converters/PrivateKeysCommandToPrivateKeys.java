@@ -30,7 +30,8 @@ public class PrivateKeysCommandToPrivateKeys implements Converter<PrivateKeyComm
         privateKeys.setId(privateKeyCommand.getId());
         privateKeys.setCreatedAt(privateKeyCommand.getCreatedAt());
         privateKeys.setPassphrase(privateKeyCommand.getPassphrase());
-        privateKeys.setPublicKeys(publicKeysCommandToPublicKeys.convert(privateKeyCommand.getPublicKeyCommand()));
+        privateKeys.setPrivateKey(privateKeyCommand.getPrivateKey());
+        //privateKeys.setPublicKeys(publicKeysCommandToPublicKeys.convert(privateKeyCommand.getPublicKeyCommand()));
         privateKeys.setUsers(usersCommandToUsers.convert(privateKeyCommand.getUsersCommand()));
         return privateKeys;
     }

@@ -1,3 +1,5 @@
+
+
 INSERT INTO USERS(first_name,last_name,email,sex,password,username) VALUES ('Ezikel', 'Jonas', 'ezekiel.jonas@uni-abu.gh','Male', '@Pa55w0rd#','eziekeljonas')
 INSERT INTO USERS(first_name,last_name,email,sex,password,username) VALUES ('Abel', 'Simeon', 'abel.simeon@uni-abu.gh','Male', '@Psycometri#','simabel')
 INSERT INTO USERS(first_name,last_name,email,sex,password,username) VALUES ('White', 'Victoria', 'white.victoria@uni-abu.gh','Female', '@Difficulty#','white')

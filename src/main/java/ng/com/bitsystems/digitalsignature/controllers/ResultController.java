@@ -93,6 +93,7 @@ public class ResultController {
                         log.info("Invalid Registration # "+matricNumber);
                     }
                 }
+                //cosmilla hotel
                 br.close();
             }
             catch (IOException e){

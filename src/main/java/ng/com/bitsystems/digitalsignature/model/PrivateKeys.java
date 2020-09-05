@@ -8,7 +8,6 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 
@@ -21,13 +20,7 @@ public class PrivateKeys extends BaseEntity {
     private String passphrase;
     private String privateKey;
 
-    @OneToOne
-    private PublicKeys publicKeys;
-
     private LocalDate createdAt;
-
-    @OneToOne
-    private Uploads uploads;
 
     @ManyToOne
     @JoinColumn(name = "users_id")
@@ -35,7 +28,7 @@ public class PrivateKeys extends BaseEntity {
 
     public PrivateKeys addPublicKey(PublicKeys publicKeys) {
         publicKeys.setPrivateKeys(this);
-        this.setPublicKeys(publicKeys);
+        //this.setPublicKeys(publicKeys);
         return this;
     }
 }

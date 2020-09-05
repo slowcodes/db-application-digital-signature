@@ -12,9 +12,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PrivateKeyCommand {
     private Long id;
-    private PublicKeyCommand publicKeyCommand;
     private LocalDate createdAt;
+    private String privateKey;
     private String passphrase;
-    private UploadCommand uploadCommand;
     private UsersCommand usersCommand;
 }

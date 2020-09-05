@@ -1,15 +1,15 @@
 package ng.com.bitsystems.digitalsignature.bootstrap;
 
 import lombok.extern.slf4j.Slf4j;
-import ng.com.bitsystems.digitalsignature.model.Courses;
-import ng.com.bitsystems.digitalsignature.model.Departments;
-import ng.com.bitsystems.digitalsignature.model.Faculties;
-import ng.com.bitsystems.digitalsignature.model.Students;
+import ng.com.bitsystems.digitalsignature.model.*;
 import ng.com.bitsystems.digitalsignature.repository.FacultiesRepository;
+import ng.com.bitsystems.digitalsignature.services.PrivateKeyService;
+import ng.com.bitsystems.digitalsignature.services.UsersService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,14 +19,26 @@ public class StudentResultBootstrap implements ApplicationListener<ContextRefres
 
 
     private FacultiesRepository facultiesRepository;
+    private PrivateKeyService privateKeyService;
+    private UsersService usersService;
 
-    public StudentResultBootstrap(FacultiesRepository facultiesRepository) {
+    public StudentResultBootstrap(FacultiesRepository facultiesRepository,
+                                  UsersService usersService,
+                                  PrivateKeyService privateKeyService) {
         this.facultiesRepository = facultiesRepository;
+        this.privateKeyService= privateKeyService;
+        this.usersService = usersService;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
+        PrivateKeys privateKeys = new PrivateKeys();
+        privateKeys.setPassphrase("anythingcango");
+        privateKeys.setUsers(usersService.findByID(Long.valueOf(1)));
+        privateKeys.setPrivateKey("94023irkw45u22qjr853u09jmfO90T4");
+        privateKeys.setCreatedAt(LocalDate.now());
+        privateKeyService.add(privateKeys);
         Set<Faculties> faculties = new HashSet<>();
 
         Faculties sciences = Faculties.builder().faculty("Sciences").build();
@@ -39,6 +51,27 @@ public class StudentResultBootstrap implements ApplicationListener<ContextRefres
                 .firstName("Kabiru")
                 .lastName("Mohammed")
                 .matricNumber("2002/190921")
+                .sex("Male")
+                .departments(mathematics)
+                .build());
+        mathematics.getStudents().add(Students.builder()
+                .firstName("Saidu")
+                .lastName("Kaita")
+                .matricNumber("2002/190922")
+                .sex("Male")
+                .departments(mathematics)
+                .build());
+        mathematics.getStudents().add(Students.builder()
+                .firstName("Fatima")
+                .lastName("Mohammed")
+                .matricNumber("2002/190923")
+                .sex("Female")
+                .departments(mathematics)
+                .build());
+        mathematics.getStudents().add(Students.builder()
+                .firstName("Aisha")
+                .lastName("Jonah")
+                .matricNumber("2002/190924")
                 .sex("Male")
                 .departments(mathematics)
                 .build());
