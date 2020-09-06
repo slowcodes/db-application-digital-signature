@@ -1,7 +1,10 @@
 package ng.com.bitsystems.digitalsignature.model;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.MappedSuperclass;
 
@@ -15,13 +18,4 @@ public class AccountHolders extends Person {
     private String username;
     private String password;
     private String email;
-
-    @Builder
-    public AccountHolders(Long id, String username, String password, String email){
-        //super(id);
-        //this.username = username;
-        this.password = password;
-        this.email = email;
-    }
-
 }

@@ -6,11 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Digital Signature Result Processor :: Add Key</title>
+        <title>Digital Signature Result Processor :: View Result</title>
         <link href="../../css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <!--/*@thymesVar id="keys" type="ng.com.bitsystems.digitalsignature.model.PrivateKeys"*/-->
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html">DS Result Processor</a>
@@ -92,7 +91,7 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Security</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="/dashboard/keys/">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Public Keys
                             </a>
@@ -114,99 +113,52 @@
                         <h4 class="mt-4"><!--Upload Result--></h4>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Generate new keys</li>
+                            <li class="breadcrumb-item active">View Result</li>
                         </ol>
                         <div class="row">
-<!--                            <div class="card mb-4">-->
-<!--                                <div class="card-body">-->
-<!--                                    Generate and manage encryption keys! Generate and manage encryption keys!! Generate and manage encryption keys!!! Generate and manage encryption keys!!!!-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-                            <div class="col-md-6 order-md-1">
-                                <!--/*@thymesVar id="pKey" type="ng.com.bitsystems.digitalsignature.model.PublicKeys"*/-->
-                                <form th:object="${pKey}" class="needs-validation" th:action="@{'/addkey'}" method="post" novalidate>
-                                    <input type="hidden" th:field="*{id}" >
-                                    <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <label for="passphrase">Passphrase</label>
-                                            <input type="text" class="form-control" id="passphrase" th:field="*{privateKeys}" required>
-                                            <div class="invalid-feedback">
-                                                Please select a valid passphrase.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <label for="algo">Algorithm</label>
-                                            <select class="custom-select d-block w-100" id="algo" required>
-                                                <option value="">Choose...</option>
-                                                <option>SHA 256</option>
-                                                <option>AES </option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select a valid algorithm.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12 mb-3">
-<!--                                            <label for="public-key">Public Key</label>-->
-<!--                                            <input type="text" class="form-control" id="public-key" th:field="*{publickey}" required>-->
-<!--                                            <small class="text-muted">Automatically generated </small>-->
-                                            <div class="invalid-feedback">
-                                                Please select a valid encryption key.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <label for="public-key">Private Key</label>
-<!--                                            <input type="text" class="form-control" id="private-key" th:field="*{privateKeys.privateKey}" required>-->
-                                            <!--<small class="text-muted">Automatically generated </small>-->
-                                            <div class="invalid-feedback">
-                                                Please select a valid encryption key.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <hr class="mb-4">
-                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Save Key </button>
-                                </form>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    Digitally signed result may not be accessible to administrator if the administrator
+                                    do not have the
+                                    <code> public key</code> of the encrypted result.
+                                    You may need to contact a system administrator if you require
+                                    <code>access</code> to results not currently available to you
+                                </div>
                             </div>
-                            <div class="col-md-6 order-md-2 mb-4">
-                                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-muted">Saved Keys</span>
-                                    <span class="badge badge-secondary badge-pill">3</span>
-                                </h4>
-                                <ul class="list-group mb-3">
-                                    <li th:each="key : ${keys}" class="list-group-item d-flex justify-content-between lh-condensed">
-                                        <div>
-                                            <h6 class="my-0" th:text="${key.passphrase}">2020-Math-221</h6>
-                                            <small class="text-muted" th:text="${key.privateKey}" >Used for CSC</small>
-                                        </div>
-                                        <span class="text-muted" th:text="${#temporals.format(key.createdAt,'dd-MMM-yyyy')}">5th April, 2020</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                        <div>
-                                            <h6 class="my-0">2020-Math-102</h6>
-                                            <small class="text-muted">Used for Math 102</small>
-                                        </div>
-                                        <span class="text-muted">17th Jun, 2020</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between bg-light">
-                                        <div class="text-success">
-                                            <h6 class="my-0">EXAMPLECODE</h6>
-                                            <small>EXAMPLE COURSE</small>
-                                        </div>
-                                        <span class="text-success">27th Jul, 2020</span>
-                                    </li>
 
-                                </ul>
+                            <div class="col-md-12 order-md-1">
+                                <!--/*@thymesVar id="student" type="ng.com.bitsystems.digitalsignature.model.Students"*/-->
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Matric #</th>
+                                        <th>Department</th>
+                                        <th>Sex</th>
+                                        <th>View Result</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Matric #</th>
+                                        <th>Department</th>
+                                        <th>Sex</th>
+                                        <th>View Result</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr th:each=" student : ${students}">
+                                            <th th:text="${student.lastName}+' '+${student.firstName}">Name</th>
+                                            <th th:text="${student.matricNumber}">Matric No</th>
+                                            <th th:text="${student.department.department}">Department</th>
+                                            <th th:text="${student.sex}">Sex</th>
+                                            <th><a href="#">View Result</a></th>
+                                        </tr>+
+                                    </tbody>
+                                </table>
                             </div>
+
                         </div>
 
 

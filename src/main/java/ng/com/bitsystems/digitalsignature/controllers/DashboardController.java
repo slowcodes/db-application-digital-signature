@@ -1,15 +1,29 @@
 package ng.com.bitsystems.digitalsignature.controllers;
 
 import ng.com.bitsystems.digitalsignature.command.UploadCommand;
+import ng.com.bitsystems.digitalsignature.command.UsersCommand;
+import ng.com.bitsystems.digitalsignature.services.StudentsService;
+import ng.com.bitsystems.digitalsignature.services.UsersService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class DashboardController {
 
+    private UsersService usersService;
+    private StudentsService studentsService;
+
+    public DashboardController(UsersService usersService, StudentsService studentsService) {
+        this.studentsService = studentsService;
+        this.usersService = usersService;
+    }
+
     @RequestMapping({"/dashboard", "dashboard.html", "dashboard/index.html"})
-    public String dashboard(Model model){
+    public String dashboard(@ModelAttribute UsersCommand userscommand, Model model){
+
+        UsersCommand usersCommand = usersService.findUserCommand(userscommand);
         return "pages/index.html";
     }
 
@@ -36,9 +50,10 @@ public class DashboardController {
         return "pages/transcript.html";
     }
 
-    @RequestMapping("/dashboard/viewresults/")
+    @RequestMapping({"/dashboard/viewresults/"})
     public String students(Model model){
-        return "pages/view.html";
+        model.addAttribute("students", studentsService.findAll());
+        return "pages/viewresult.html";
     }
 
 }

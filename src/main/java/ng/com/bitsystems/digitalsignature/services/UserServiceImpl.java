@@ -7,6 +7,7 @@ import ng.com.bitsystems.digitalsignature.converters.UsersToUsersCommand;
 import ng.com.bitsystems.digitalsignature.model.Users;
 import ng.com.bitsystems.digitalsignature.repository.UsersRepository;
 import org.springframework.context.annotation.Primary;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -67,5 +68,18 @@ public class UserServiceImpl implements UsersService{
         Users savedUser = usersRepository.save(detachedUser);
         log.info("New user has been saved");
         return usersToUsersCommand.convert(savedUser);
+    }
+
+    @Override
+    @Transactional
+    @Nullable
+    public UsersCommand findUserCommand(UsersCommand userscommand) {
+        Users user = null;
+        findAll().forEach(users -> {
+            if (users.getEmail().equals(userscommand.getEmail())){
+                //user=users;
+            }
+        });
+        return usersToUsersCommand.convert(user);
     }
 }

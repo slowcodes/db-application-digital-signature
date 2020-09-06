@@ -15,6 +15,7 @@ import java.util.Set;
 @Table(name = "users")
 public class Users extends AccountHolders {
 
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<UsersPrivileges> usersPrivileges = new HashSet<>();
 

@@ -1,5 +1,6 @@
 package ng.com.bitsystems.digitalsignature.services.springdatajpa;
 
+import lombok.extern.slf4j.Slf4j;
 import ng.com.bitsystems.digitalsignature.command.ResultCommand;
 import ng.com.bitsystems.digitalsignature.converters.ResultsCommandToResults;
 import ng.com.bitsystems.digitalsignature.converters.ResultsToResultsCommand;
@@ -13,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class ResultSDJpaService implements ResultsService {
     private ResultsRepository resultsRepository;
     private ResultsToResultsCommand resultsToResultsCommand;
@@ -56,8 +58,10 @@ public class ResultSDJpaService implements ResultsService {
     @Override
     @Transactional
     public ResultCommand addResultCommand(ResultCommand resultCommand) {
+
         Results results = resultsCommandToResults.convert(resultCommand);
-        Results detached = add(results);
+        log.info("Safely arrived result SDJPA");
+        Results detached = resultsRepository.save(results);
         return resultsToResultsCommand.convert(detached);
     }
 }

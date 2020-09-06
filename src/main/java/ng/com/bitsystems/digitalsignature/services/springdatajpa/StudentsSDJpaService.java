@@ -75,4 +75,11 @@ public class StudentsSDJpaService implements StudentsService {
         }
         return null;
     }
+
+    @Override
+    public StudentCommand addCommand(StudentCommand studentCommand) {
+        Students students = studentsCommandToStudents.convert(studentCommand);
+        Students detachedStudent = studentsRepository.save(students);
+        return studentsToStudentsCommand.convert(detachedStudent);
+    }
 }

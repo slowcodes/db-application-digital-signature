@@ -8,4 +8,5 @@ public interface UsersService extends CrudService<Users, Long> {
     UsersCommand findCommandById(Long l);
     UsersCommand addUserCommand(UsersCommand usersCommand);
 
+    UsersCommand findUserCommand(UsersCommand userscommand);
 }

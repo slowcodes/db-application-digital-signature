@@ -38,7 +38,7 @@ public class ResultController {
         this.studentsService = studentsService;
     }
 
-    @RequestMapping({"/result/upload/"})
+    @RequestMapping({"/results/upload/"})
     public String upload(Model model){
         model.addAttribute("upload", new UploadCommand());
         model.addAttribute("sessions", sessionService.findAll());
@@ -83,7 +83,9 @@ public class ResultController {
                         resultCommand.setTestScore(Double.parseDouble(values[2]));
                         resultCommand.setExamScore(Double.parseDouble(values[3]));
                         resultCommand.setStudentCommand(studentCommand);
-                        resultCommand.setUploadCommand(command);
+                        //resultCommand.setUploadCommand(command);
+                        //studentCommand.getResultCommands().add(resultCommand);
+                        //studentsService.addCommand(studentCommand);
                         resultsService.addResultCommand(resultCommand);
 
                         log.info("Valid Registration # "+matricNumber);

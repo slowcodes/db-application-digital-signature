@@ -23,6 +23,11 @@ public class UsersSDJpaService implements UsersService {
         return null;
     }
 
+    @Override
+    public UsersCommand findUserCommand(UsersCommand userscommand) {
+        return null;
+    }
+
     public UsersSDJpaService(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }

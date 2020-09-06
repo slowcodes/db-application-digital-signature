@@ -22,7 +22,7 @@ public class KeyController {
         this.publicKeysService = publicKeysService;
     }
 
-    @RequestMapping("/keys/")
+    @RequestMapping("/keys")
     public String publickeys(Model model){
         //model.addAttribute("pKey", new PrivateKeyCommand());
         model.addAttribute("pKey", new PublicKeyCommand());

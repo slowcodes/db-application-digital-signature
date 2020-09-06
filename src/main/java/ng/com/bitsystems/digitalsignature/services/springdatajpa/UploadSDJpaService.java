@@ -5,6 +5,7 @@ import ng.com.bitsystems.digitalsignature.converters.UploadCommandToUploads;
 import ng.com.bitsystems.digitalsignature.converters.UploadsToUploadCommmand;
 import ng.com.bitsystems.digitalsignature.model.Uploads;
 import ng.com.bitsystems.digitalsignature.repository.UploadRepository;
+import ng.com.bitsystems.digitalsignature.repository.UsersRepository;
 import ng.com.bitsystems.digitalsignature.services.UploadService;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +19,16 @@ public class UploadSDJpaService implements UploadService {
     private UploadRepository uploadRepository;
     private UploadCommandToUploads uploadCommandToUploads;
     private UploadsToUploadCommmand uploadsToUploadCommmand;
+    private UsersRepository usersRepository;
 
     public UploadSDJpaService(UploadRepository uploadRepository,
+                              UsersRepository usersRepository,
                               UploadCommandToUploads uploadCommandToUploads,
                               UploadsToUploadCommmand uploadsToUploadCommmand) {
         this.uploadRepository = uploadRepository;
         this.uploadCommandToUploads = uploadCommandToUploads;
         this.uploadsToUploadCommmand = uploadsToUploadCommmand;
+        this.usersRepository = usersRepository;
     }
 
     @Override
@@ -59,6 +63,7 @@ public class UploadSDJpaService implements UploadService {
     @Transactional
     public UploadCommand addUploadCommand(UploadCommand uploadCommand){
         Uploads detachedUpload = uploadCommandToUploads.convert(uploadCommand);
+        detachedUpload.setOwner(usersRepository.findById(new Long(1)).get());
         Uploads uploads = add(detachedUpload);
         return uploadsToUploadCommmand.convert(uploads);
     }
