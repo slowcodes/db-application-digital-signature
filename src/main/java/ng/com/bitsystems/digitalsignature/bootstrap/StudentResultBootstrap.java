@@ -34,7 +34,7 @@ public class StudentResultBootstrap implements ApplicationListener<ContextRefres
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
         PrivateKeys privateKeys = new PrivateKeys();
-        privateKeys.setPassphrase("anythingcango");
+        privateKeys.setPassphrase("2019/2020coskey");
         privateKeys.setUsers(usersService.findByID(Long.valueOf(1)));
         privateKeys.setPrivateKey("94023irkw45u22qjr853u09jmfO90T4");
         privateKeys.setCreatedAt(LocalDate.now());

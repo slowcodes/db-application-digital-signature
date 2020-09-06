@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 
 @Slf4j
@@ -24,8 +27,10 @@ public class ResultController {
     private DepartmentService departmentService;
     private UploadService uploadService;
     private StudentsService studentsService;
+    private PrivateKeyService privateKeyService;
 
     public ResultController(CoursesServices coursesServices,
+                            PrivateKeyService privateKeyService,
                             ResultsService resultsService, SessionService sessionService,
                             DepartmentService departmentService,
                             UploadService uploadService,
@@ -36,6 +41,7 @@ public class ResultController {
         this.departmentService = departmentService;
         this.uploadService = uploadService;
         this.studentsService = studentsService;
+        this.privateKeyService = privateKeyService;
     }
 
     @RequestMapping({"/results/upload/"})
@@ -43,6 +49,7 @@ public class ResultController {
         model.addAttribute("upload", new UploadCommand());
         model.addAttribute("sessions", sessionService.findAll());
         model.addAttribute("courses", coursesServices.findAll());
+        model.addAttribute("keys", privateKeyService.findAll());
         return "pages/upload.html";
     }
 
@@ -97,6 +104,7 @@ public class ResultController {
                 }
                 //cosmilla hotel
                 br.close();
+                model.addAttribute("message", "Result has been suceesfully uploaded. A student's result can be accessed by clicking on the view results link");
             }
             catch (IOException e){
                 model.addAttribute("message", "An error occurred while processing the CSV file.");
@@ -109,16 +117,9 @@ public class ResultController {
                 e.printStackTrace();
             }
 
-
-            try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-
-            }
-            catch (IOException e){
-                model.addAttribute("message", "An error occurred while processing the CSV file.");
-                model.addAttribute("status", false);
-            }
         }
         model.addAttribute("upload", new UploadCommand());
-        return "pages/upload.html";
+        //model.addAttribute("message", "Result has been suceesfully uploaded. A student's result can be accessed by clicking on the view results link");
+        return "pages/uploadresult.html";
     }
 }

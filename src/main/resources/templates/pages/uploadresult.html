@@ -57,7 +57,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/results/upload/">Upload Results</a>
                                     <a class="nav-link" href="/dashboard/enter/">Enter Results</a>
-                                    <a class="nav-link" href="/dashboard/enter/">View Result</a>
+                                    <a class="nav-link" href="/dashboard/viewresults//">View Result</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -132,80 +132,11 @@
                                 <!--/*@thymesVar id="upload" type="ng.com.bitsystems.digitalsignature.model.Uploads"*/-->
                                 <!--/*@thymesVar id="sessions" type="ng.com.bitsystems.digitalsignature.model.Sessions"*/-->
                                 <!--/*@thymesVar id="courses" type="ng.com.bitsystems.digitalsignature.model.courses"*/-->
-                                <form th:object="${upload}" th:action="@{'/result/process_upload/'}" method="post" class="needs-validation" enctype="multipart/form-data" novalidate  id="result-form">
-                                    <input type="hidden" th:field="*{id}" >
-                                    <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <div th:if="${keys != null and not #lists.isEmpty(keys)}">
-                                                <label for="keys">Signing Keys</label>
-                                                <select class="custom-select d-block w-100" id="keys"  required>
-                                                    <option value="">Choose...</option>
-                                                    <option th:each="key : ${keys}"
-                                                            th:value="${key.id}"
-                                                            th:text="${key.passphrase}" />
-                                                </select>
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Please select a valid encryption key.
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <div th:if="${courses != null and not #lists.isEmpty(courses)}">
-                                                <label for="department">Courses</label>
-                                                <select class="custom-select d-block w-100" id="department" th:field="*{coursesCommand.id}" required>
-                                                    <option value="">Choose...</option>
-                                                    <option th:each="course : ${courses}"
-                                                            th:value="${course.id}"
-                                                            th:text="${course.courseTitle}" />
-                                                </select>
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Please select a valid a department.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div th:if="${sessions != null and not #lists.isEmpty(sessions)}">
-                                                <label for="state">Session</label>
-                                                <select class="custom-select d-block w-100" id="state" required th:field="*{sessionCommand.id}">
-                                                    <option value="">Choose...</option>
-                                                    <option th:each="academic_session : ${sessions}"
-                                                            th:value="${academic_session.id}"
-                                                            th:text="${academic_session.session}" />
-                                                </select>
-                                                <div class="invalid-feedback">
-                                                    Please provide a valid session.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="file">Upload Result <span class="text-muted">(.csv format)</span></label>
-                                            <input type="file" class="form-control" accept=".csv" id="file" name="file" placeholder="Result File" required>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <label for="upload-file">View .csv file before uploading <span class="text-muted">(.csv format)</span></label>
-                                            <button class="btn btn-primary  btn-block" type="button" id="upload-file">View .csv</button>
-                                        </div>
-                                    </div>
-
-                                    <div id="parsed_csv_list"></div>
-                                    <hr class="mb-4">
-                                    <button class="btn btn-success btn-lg btn-block" type="submit">Process upload</button>
-                                </form>
-
+                                <div>
+                                    <p th:text="${message}">upload </p>
+                                </div>
                             </div>
-                            <div class="col-md-4 order-md-2 mb-4">
-                                <b>Key in Use (Tag):</b>comphy
-                                <button class="btn btn-warning btn-lg btn-block" type="button">Create new encryption keys</button>
-                                <button class="btn btn-success btn-lg btn-block" type="button">Use existing keys</button>
-                                <button class="btn btn-danger btn-lg btn-block" type="button">Do not use encryption keys</button>
-                            </div>
+
                         </div>
 
 

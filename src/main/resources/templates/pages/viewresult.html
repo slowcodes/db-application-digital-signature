@@ -149,12 +149,12 @@
                                     </tfoot>
                                     <tbody>
                                         <tr th:each=" student : ${students}">
-                                            <th th:text="${student.lastName}+' '+${student.firstName}">Name</th>
-                                            <th th:text="${student.matricNumber}">Matric No</th>
-                                            <th th:text="${student.department.department}">Department</th>
-                                            <th th:text="${student.sex}">Sex</th>
-                                            <th><a href="#">View Result</a></th>
-                                        </tr>+
+                                            <td th:text="${student.lastName}+' '+${student.firstName}">Name</td>
+                                            <td th:text="${student.matricNumber}">Matric No</td>
+                                            <td th:text="${student.department.department}">Department</td>
+                                            <td th:text="${student.sex}">Sex</td>
+                                            <td><a href="#">View Result</a></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
