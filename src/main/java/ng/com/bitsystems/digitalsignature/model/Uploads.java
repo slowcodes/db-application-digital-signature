@@ -35,8 +35,6 @@ public class Uploads extends BaseEntity {
     @OneToOne
     private PrivateKeys privateKeys;
 
-    @OneToOne
-    private PublicKeys publicKeys;
 
     public Uploads addResult(Results results) {
         results.setUpload(this);

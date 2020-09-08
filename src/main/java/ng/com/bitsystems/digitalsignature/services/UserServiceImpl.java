@@ -58,7 +58,7 @@ public class UserServiceImpl implements UsersService{
 
     @Override
     public UsersCommand findCommandById(Long l) {
-        return null;
+        return usersToUsersCommand.convert(findByID(l));
     }
 
     @Override

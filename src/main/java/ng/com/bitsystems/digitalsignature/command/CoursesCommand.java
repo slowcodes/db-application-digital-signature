@@ -20,5 +20,4 @@ public class CoursesCommand {
     private Long departmentId;
     private Set<ResultCommand> resultCommand = new HashSet<>();
     private Set<UploadCommand> uploadCommands = new HashSet<>();
-    private Set<StudentCommand> studentCommands = new HashSet<>();
 }

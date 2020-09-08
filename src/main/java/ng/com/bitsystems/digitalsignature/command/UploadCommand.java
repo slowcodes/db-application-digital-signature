@@ -20,5 +20,4 @@ public class UploadCommand {
     private SessionCommand sessionCommand;
     private Set<ResultCommand> resultCommand = new HashSet<>();
     private PrivateKeyCommand privateKeyCommand;
-    private PublicKeyCommand publicKeyCommand;
 }

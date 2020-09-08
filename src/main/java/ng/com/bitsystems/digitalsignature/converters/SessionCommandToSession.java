@@ -19,7 +19,6 @@ public class SessionCommandToSession implements Converter<SessionCommand, Sessio
         }
 
         Sessions sessions = new Sessions();
-        sessions.setDescription(sessionCommand.getDescription());
 
 //        if(sessionCommand.getResultCommands().size()>0 && sessionCommand.getResultCommands() != null)
 //            sessionCommand.getResultCommands().forEach(resultCommand -> sessions.getResults().add(resultsCommandToResults.convert(resultCommand)));

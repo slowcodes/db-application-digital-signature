@@ -61,4 +61,9 @@ public class PrivateKeySDJpaService implements PrivateKeyService {
         PrivateKeys savedKey = privateKeyRepository.save(privateKeys);
         return privateKeysToPrivateKeysCommand.convert(savedKey);
     }
+
+    @Override
+    public PrivateKeyCommand findCommandByID(Long id) {
+        return privateKeysToPrivateKeysCommand.convert(privateKeyRepository.findById(id).get());
+    }
 }

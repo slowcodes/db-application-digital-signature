@@ -20,7 +20,6 @@ public class SessionToSessionCommand implements Converter<Sessions, SessionComma
         }
 
         SessionCommand sessionCommand = new SessionCommand();
-        sessionCommand.setDescription(sessions.getDescription());
         sessionCommand.setSession(sessions.getSession());
 //        if (sessions.getResults().size()>0 && sessions.getResults() != null)
 //            sessions.getResults().forEach(results -> sessionCommand.getResultCommands().add(resultsToResultsCommand.convert(results)));

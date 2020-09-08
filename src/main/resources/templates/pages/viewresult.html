@@ -153,7 +153,7 @@
                                             <td th:text="${student.matricNumber}">Matric No</td>
                                             <td th:text="${student.department.department}">Department</td>
                                             <td th:text="${student.sex}">Sex</td>
-                                            <td><a href="#">View Result</a></td>
+                                            <td><a th:href="@{'/results/'+${student.id}+'/view'}">View Result</a></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -64,4 +64,18 @@ public class ResultSDJpaService implements ResultsService {
         Results detached = resultsRepository.save(results);
         return resultsToResultsCommand.convert(detached);
     }
+
+    @Override
+    public Set<Results> getStudentResultById(Long aLong) {
+        Set<Results> results = new HashSet<>();
+        Set<Results> allResults = findAll();
+
+        for(Results result : allResults) {
+
+            if(result.getStudent().getId() == aLong){
+                results.add(result);
+            }
+        };
+        return results;
+    }
 }

@@ -16,7 +16,6 @@ import java.util.Set;
 public class Sessions extends BaseEntity {
 
     private String session;
-    private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "session")
     private Set<Uploads> uploads = new HashSet<>();

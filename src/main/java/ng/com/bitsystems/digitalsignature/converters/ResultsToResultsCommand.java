@@ -11,12 +11,10 @@ import org.springframework.stereotype.Component;
 public class ResultsToResultsCommand implements Converter<Results, ResultCommand> {
 
     private StudentsToStudentsCommand studentsToStudentsCommand;
-    private UploadsToUploadCommmand uploadsToUploadCommmand;
 
 
-    public ResultsToResultsCommand(StudentsToStudentsCommand studentsToStudentsCommand, UploadsToUploadCommmand uploadsToUploadCommmand) {
+    public ResultsToResultsCommand(StudentsToStudentsCommand studentsToStudentsCommand) {
         this.studentsToStudentsCommand = studentsToStudentsCommand;
-        this.uploadsToUploadCommmand = uploadsToUploadCommmand;
     }
 
     @Synchronized
@@ -29,10 +27,15 @@ public class ResultsToResultsCommand implements Converter<Results, ResultCommand
 
         ResultCommand resultCommand = new ResultCommand();
         resultCommand.setId(results.getId());
+
+        if(results.getId() != null){
+            resultCommand.setUploadId(results.getUpload().getId());
+        }
+
         resultCommand.setExamScore(results.getExamScore());
         resultCommand.setTestScore(results.getTestScore());
         resultCommand.setStudentCommand(studentsToStudentsCommand.convert(results.getStudent()));
-        resultCommand.setUploadCommand(uploadsToUploadCommmand.convert(results.getUpload()));
+
         return resultCommand;
     }
 }

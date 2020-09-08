@@ -5,10 +5,7 @@ import ng.com.bitsystems.digitalsignature.command.*;
 import ng.com.bitsystems.digitalsignature.services.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
@@ -28,10 +25,13 @@ public class ResultController {
     private UploadService uploadService;
     private StudentsService studentsService;
     private PrivateKeyService privateKeyService;
+    private UsersService usersService;
 
     public ResultController(CoursesServices coursesServices,
                             PrivateKeyService privateKeyService,
-                            ResultsService resultsService, SessionService sessionService,
+                            UsersService usersService,
+                            ResultsService resultsService,
+                            SessionService sessionService,
                             DepartmentService departmentService,
                             UploadService uploadService,
                             StudentsService studentsService) {
@@ -42,6 +42,7 @@ public class ResultController {
         this.uploadService = uploadService;
         this.studentsService = studentsService;
         this.privateKeyService = privateKeyService;
+        this.usersService = usersService;
     }
 
     @RequestMapping({"/results/upload/"})
@@ -51,6 +52,13 @@ public class ResultController {
         model.addAttribute("courses", coursesServices.findAll());
         model.addAttribute("keys", privateKeyService.findAll());
         return "pages/upload.html";
+    }
+
+    @RequestMapping({"results/{id}/view"})
+    public String studentResult(@PathVariable String id, Model model){
+        //results = studentsService.findByID(new Long(id)).getResults(); //resultsService.getStudentResultById(new Long(id));
+        model.addAttribute("results", studentsService.findByID(new Long(id)));
+        return "pages/studentresults.html";
     }
 
     @PostMapping("/result/process_upload/")
@@ -64,14 +72,17 @@ public class ResultController {
         else {
 
             try{
+
                 CoursesCommand coursesCommand = coursesServices.getCourseCommandById(uploadCommand.getCoursesCommand().getId());
                 SessionCommand sessionCommand = sessionService.getSessionCommandById(uploadCommand.getSessionCommand().getId());
 
                 uploadCommand.setCoursesCommand(coursesCommand);
                 uploadCommand.setSessionCommand(sessionCommand);
                 uploadCommand.setDateOfUpload(LocalDate.now());
-
+                uploadCommand.setUsersCommand(usersService.findCommandById(new Long(1)));
+                uploadCommand.setPrivateKeyCommand(privateKeyService.findCommandByID(uploadCommand.getPrivateKeyCommand().getId()));
                 UploadCommand command = uploadService.addUploadCommand(uploadCommand);
+
                 byte[] bytes = file.getBytes();
                 ByteArrayInputStream inputFilestream = new ByteArrayInputStream(bytes);
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputFilestream ));
@@ -87,24 +98,25 @@ public class ResultController {
                     if(studentsService.getCommandByMatricNumber(matricNumber) != null){
 
                         ResultCommand resultCommand = new ResultCommand();
+
                         resultCommand.setTestScore(Double.parseDouble(values[2]));
                         resultCommand.setExamScore(Double.parseDouble(values[3]));
                         resultCommand.setStudentCommand(studentCommand);
-                        //resultCommand.setUploadCommand(command);
+                        resultCommand.setUploadId(command.getId());
                         //studentCommand.getResultCommands().add(resultCommand);
                         //studentsService.addCommand(studentCommand);
                         resultsService.addResultCommand(resultCommand);
-
+                        command.getResultCommand().add(resultCommand);
                         log.info("Valid Registration # "+matricNumber);
                     }
                     else {
                         //invalid  student
-                        log.info("Invalid Registration # "+matricNumber);
+                        log.info("Invalid Registration #"+matricNumber);
                     }
                 }
                 //cosmilla hotel
                 br.close();
-                model.addAttribute("message", "Result has been suceesfully uploaded. A student's result can be accessed by clicking on the view results link");
+                model.addAttribute("message", "Result has been successfully uploaded. A student's result can be accessed by clicking on the view results link");
             }
             catch (IOException e){
                 model.addAttribute("message", "An error occurred while processing the CSV file.");

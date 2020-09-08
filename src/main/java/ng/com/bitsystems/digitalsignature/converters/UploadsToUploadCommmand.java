@@ -11,17 +11,18 @@ import org.springframework.stereotype.Component;
 public class UploadsToUploadCommmand implements Converter<Uploads, UploadCommand> {
 
     private CoursesToCoursesCommand coursesToCoursesCommand;
-    private PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand;
     private PrivateKeysToPrivateKeysCommand privateKeysToPrivateKeysCommand;
     private UsersToUsersCommand usersToUsersCommand;
     private SessionToSessionCommand sessionToSessionCommand;
+    private ResultsToResultsCommand resultsToResultsCommand;
 
-    public UploadsToUploadCommmand(CoursesToCoursesCommand coursesToCoursesCommand, SessionToSessionCommand sessionToSessionCommand, PublicKeysToPublicKeysCommand publicKeysToPublicKeysCommand, PrivateKeysToPrivateKeysCommand privateKeysToPrivateKeysCommand, UsersToUsersCommand usersToUsersCommand) {
+    public UploadsToUploadCommmand(ResultsToResultsCommand resultsToResultsCommand,
+                                   CoursesToCoursesCommand coursesToCoursesCommand, SessionToSessionCommand sessionToSessionCommand, PrivateKeysToPrivateKeysCommand privateKeysToPrivateKeysCommand, UsersToUsersCommand usersToUsersCommand) {
         this.coursesToCoursesCommand = coursesToCoursesCommand;
         this.sessionToSessionCommand = sessionToSessionCommand;
-        this.publicKeysToPublicKeysCommand = publicKeysToPublicKeysCommand;
         this.privateKeysToPrivateKeysCommand = privateKeysToPrivateKeysCommand;
         this.usersToUsersCommand = usersToUsersCommand;
+        this.resultsToResultsCommand = resultsToResultsCommand;
     }
 
     @Synchronized
@@ -38,8 +39,10 @@ public class UploadsToUploadCommmand implements Converter<Uploads, UploadCommand
         uploadCommand.setId(uploads.getId());
         uploadCommand.setSessionCommand(sessionToSessionCommand.convert(uploads.getSession()));
         uploadCommand.setPrivateKeyCommand(privateKeysToPrivateKeysCommand.convert(uploads.getPrivateKeys()));
-        uploadCommand.setPublicKeyCommand(publicKeysToPublicKeysCommand.convert(uploads.getPublicKeys()));
         uploadCommand.setUsersCommand(usersToUsersCommand.convert(uploads.getOwner()));
+
+        if (uploads.getResults().size()>0 && uploads.getResults() !=null)
+            uploads.getResults().forEach(results -> uploadCommand.getResultCommand().add(resultsToResultsCommand.convert(results)));
 
         return uploadCommand;
     }

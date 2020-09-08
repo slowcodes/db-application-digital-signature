@@ -14,6 +14,5 @@ import java.util.Set;
 public class SessionCommand {
     private Long id;
     private String session;
-    private String description;
     private Set<ResultCommand> resultCommands = new HashSet<>();
 }

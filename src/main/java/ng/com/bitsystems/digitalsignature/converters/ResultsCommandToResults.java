@@ -3,6 +3,7 @@ package ng.com.bitsystems.digitalsignature.converters;
 import lombok.Synchronized;
 import ng.com.bitsystems.digitalsignature.command.ResultCommand;
 import ng.com.bitsystems.digitalsignature.model.Results;
+import ng.com.bitsystems.digitalsignature.model.Uploads;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -11,11 +12,9 @@ import org.springframework.stereotype.Component;
 public class ResultsCommandToResults implements Converter<ResultCommand, Results> {
 
     private StudentsCommandToStudents studentsCommandToStudents;
-    private UploadCommandToUploads uploadCommandToUploads;
 
-    public ResultsCommandToResults(StudentsCommandToStudents studentsCommandToStudents, UploadCommandToUploads uploadCommandToUploads) {
+    public ResultsCommandToResults(StudentsCommandToStudents studentsCommandToStudents) {
         this.studentsCommandToStudents = studentsCommandToStudents;
-        this.uploadCommandToUploads = uploadCommandToUploads;
     }
 
     @Synchronized
@@ -28,10 +27,17 @@ public class ResultsCommandToResults implements Converter<ResultCommand, Results
 
         Results results = new Results();
         results.setId(resultCommand.getId());
+
+        if(resultCommand.getUploadId() != null){
+            Uploads uploads = new Uploads();
+            uploads.setId(resultCommand.getUploadId());
+            results.setUpload(uploads);
+            uploads.addResult(results);
+        }
+
         results.setExamScore(resultCommand.getExamScore());
         results.setTestScore(resultCommand.getTestScore());
         results.setStudent(studentsCommandToStudents.convert(resultCommand.getStudentCommand()));
-        results.setUpload(uploadCommandToUploads.convert(resultCommand.getUploadCommand()));
         return results;
     }
 }

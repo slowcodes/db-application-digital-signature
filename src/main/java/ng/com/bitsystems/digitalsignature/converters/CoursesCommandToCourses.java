@@ -24,7 +24,7 @@ public class CoursesCommandToCourses implements Converter<CoursesCommand, Course
         courses.setId(coursesCommand.getId());
         courses.setCourseCode(coursesCommand.getCourseCode());
         courses.setCourseTitle(coursesCommand.getCourseTitle());
-        courses.setCredits(courses.getCredits());
+        courses.setCredits(coursesCommand.getCredits());
 
 //        if(coursesCommand.getResultCommand().size()>0 && coursesCommand.getResultCommand() != null){
 //            coursesCommand.getResultCommand().forEach(resultCommand -> courses.getResults().add(resultsCommandToResults.convert(resultCommand)));

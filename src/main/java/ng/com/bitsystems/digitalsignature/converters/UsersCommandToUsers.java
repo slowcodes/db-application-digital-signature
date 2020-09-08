@@ -25,6 +25,7 @@ public class UsersCommandToUsers implements Converter<UsersCommand, Users> {
         users.setUsername(usersCommand.getUsername());
         users.setFirstName(usersCommand.getFirstName());
         users.setLastName(usersCommand.getLastName());
+        users.setSex(usersCommand.getSex());
         return users;
     }
 }

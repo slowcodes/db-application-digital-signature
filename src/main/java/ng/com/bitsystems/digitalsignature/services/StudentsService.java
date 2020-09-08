@@ -8,4 +8,5 @@ public interface StudentsService extends CrudService<Students, Long> {
     Students findByMatricNumber(String matricNumber);
 
     StudentCommand addCommand(StudentCommand studentCommand);
+    //Set<Results> getStudentsResultsById(Long id);
 }

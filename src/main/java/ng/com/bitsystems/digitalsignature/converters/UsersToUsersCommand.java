@@ -23,7 +23,7 @@ public class UsersToUsersCommand implements Converter<Users, UsersCommand> {
         usersCommand.setFirstName(users.getFirstName());
         usersCommand.setLastName(users.getLastName());
         usersCommand.setUsername(users.getUsername());
-
+        usersCommand.setPassword(users.getPassword());
 //        if(users.getUsersPrivileges().size()>0 && users.getUsersPrivileges() != null)
 //            users.getUsersPrivileges().forEach(usersPrivileges -> usersCommand.getUserPrivilegeCommands().add(usersPrivilegeToUsersPrivilegeCommand.convert(usersPrivileges)));
 
