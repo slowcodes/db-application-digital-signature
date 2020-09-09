@@ -14,5 +14,11 @@ public class ResultCommand {
     private StudentCommand studentCommand;
     private Long uploadId;
     private Long id;
+
+    //Only required for presentation
+    private String grade;
+    private Double total;
+    private String courseCode;
+    private String courseTitle;
 }
 

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +17,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class PublicKeys extends BaseEntity{
-    //private String passphrase;
     private String publickey;
 
     @ManyToMany
@@ -32,8 +30,6 @@ public class PublicKeys extends BaseEntity{
             joinColumns = @JoinColumn(name = "publickeys_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id"))
     private Set<Students> students = new HashSet<>();
-
-    private LocalDate createdAt;
 
     @OneToOne
     private PrivateKeys privateKeys;

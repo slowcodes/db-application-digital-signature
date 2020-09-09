@@ -1,11 +1,13 @@
 package ng.com.bitsystems.digitalsignature.services.springdatajpa;
 
 import ng.com.bitsystems.digitalsignature.command.PrivateKeyCommand;
+import ng.com.bitsystems.digitalsignature.command.UsersCommand;
 import ng.com.bitsystems.digitalsignature.converters.PrivateKeysCommandToPrivateKeys;
 import ng.com.bitsystems.digitalsignature.converters.PrivateKeysToPrivateKeysCommand;
 import ng.com.bitsystems.digitalsignature.model.PrivateKeys;
 import ng.com.bitsystems.digitalsignature.repository.PrivateKeyRepository;
 import ng.com.bitsystems.digitalsignature.services.PrivateKeyService;
+import ng.com.bitsystems.digitalsignature.services.UsersService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -16,13 +18,13 @@ public class PrivateKeySDJpaService implements PrivateKeyService {
     private PrivateKeyRepository privateKeyRepository;
     private PrivateKeysCommandToPrivateKeys privateKeysCommandToPrivateKeys;
     private PrivateKeysToPrivateKeysCommand privateKeysToPrivateKeysCommand;
-    private UsersSDJpaService usersSDJpaService;
+    private UsersService usersService;
 
-    public PrivateKeySDJpaService(PrivateKeyRepository privateKeyRepository, UsersSDJpaService usersSDJpaService,
+    public PrivateKeySDJpaService(PrivateKeyRepository privateKeyRepository, UsersService usersService,
                                   PrivateKeysCommandToPrivateKeys privateKeysCommandToPrivateKeys,
                                   PrivateKeysToPrivateKeysCommand privateKeysToPrivateKeysCommand) {
         this.privateKeyRepository = privateKeyRepository;
-        this.usersSDJpaService = usersSDJpaService;
+        this.usersService = usersService;
         this.privateKeysCommandToPrivateKeys=privateKeysCommandToPrivateKeys;
         this.privateKeysToPrivateKeysCommand=privateKeysToPrivateKeysCommand;
     }
@@ -56,8 +58,9 @@ public class PrivateKeySDJpaService implements PrivateKeyService {
 
     @Override
     public PrivateKeyCommand add(PrivateKeyCommand privateKeyCommand) {
+        UsersCommand usersCommand = usersService.findCommandById(new Long(1));
+        privateKeyCommand.setUsersCommand(usersCommand);
         PrivateKeys privateKeys = privateKeysCommandToPrivateKeys.convert(privateKeyCommand);
-        privateKeys.setUsers(usersSDJpaService.findByID(new Long(1)));
         PrivateKeys savedKey = privateKeyRepository.save(privateKeys);
         return privateKeysToPrivateKeysCommand.convert(savedKey);
     }

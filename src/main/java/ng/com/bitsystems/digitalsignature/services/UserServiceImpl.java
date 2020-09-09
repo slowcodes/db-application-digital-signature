@@ -30,7 +30,6 @@ public class UserServiceImpl implements UsersService{
 
     @Override
     public Set<Users> findAll() {
-
         Set<Users> users = new HashSet<>();
         usersRepository.findAll().forEach(users::add);
         return users;
@@ -58,7 +57,7 @@ public class UserServiceImpl implements UsersService{
 
     @Override
     public UsersCommand findCommandById(Long l) {
-        return usersToUsersCommand.convert(findByID(l));
+        return usersToUsersCommand.convert(usersRepository.findById(l).get());
     }
 
     @Override

@@ -2,6 +2,8 @@ package ng.com.bitsystems.digitalsignature.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import ng.com.bitsystems.digitalsignature.command.*;
+import ng.com.bitsystems.digitalsignature.converters.ResultsToResultsCommand;
+import ng.com.bitsystems.digitalsignature.model.Results;
 import ng.com.bitsystems.digitalsignature.services.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -26,8 +30,10 @@ public class ResultController {
     private StudentsService studentsService;
     private PrivateKeyService privateKeyService;
     private UsersService usersService;
+    private ResultsToResultsCommand resultsToResultsCommand;
 
     public ResultController(CoursesServices coursesServices,
+                            ResultsToResultsCommand resultsToResultsCommand,
                             PrivateKeyService privateKeyService,
                             UsersService usersService,
                             ResultsService resultsService,
@@ -43,6 +49,7 @@ public class ResultController {
         this.studentsService = studentsService;
         this.privateKeyService = privateKeyService;
         this.usersService = usersService;
+        this.resultsToResultsCommand = resultsToResultsCommand;
     }
 
     @RequestMapping({"/results/upload/"})
@@ -56,8 +63,53 @@ public class ResultController {
 
     @RequestMapping({"results/{id}/view"})
     public String studentResult(@PathVariable String id, Model model){
-        //results = studentsService.findByID(new Long(id)).getResults(); //resultsService.getStudentResultById(new Long(id));
-        model.addAttribute("results", studentsService.findByID(new Long(id)));
+
+        Set<ResultCommand> resultCommands = new HashSet<>();
+        Set<Results> results  =studentsService.findByID(new Long(id)).getResults();
+        model.addAttribute("student", studentsService.findByID(new Long(id)));
+
+        double cumulative = 0;
+        double totalUnit = 0;
+        for (Results result: results){
+            double point = 0;
+            ResultCommand resultCommand = resultsToResultsCommand.convert(result);
+            resultCommand.setCourseTitle(result.getUpload().getCourse().getCourseTitle());
+            resultCommand.setCourseCode(result.getUpload().getCourse().getCourseCode());
+            Double total = resultCommand.getExamScore() + resultCommand.getTestScore();
+            resultCommand.setTotal(total);
+
+            if(total >= 70) {
+                resultCommand.setGrade("A");
+                point = 5;
+            }
+            else if (total >= 60){
+                resultCommand.setGrade("B");
+                point = 4;
+            }
+            else if (total >= 50){
+                resultCommand.setGrade("C");
+                point = 3;
+            }
+            else if (total >= 45){
+                resultCommand.setGrade("D");
+                point = 2;
+            }
+            else if (total >= 40){
+                resultCommand.setGrade("E");
+                point = 1;
+            }
+            else {
+                resultCommand.setGrade("F");
+                point = 0;
+            }
+            resultCommands.add(resultCommand);
+            totalUnit += result.getUpload().getCourse().getCredits();
+            cumulative += point * result.getUpload().getCourse().getCredits();
+        }
+        double cgpa = cumulative/totalUnit;
+
+        model.addAttribute("cgpa", cgpa);
+        model.addAttribute("results", resultCommands);
         return "pages/studentresults.html";
     }
 

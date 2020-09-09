@@ -16,4 +16,5 @@ public class PrivateKeyCommand {
     private String privateKey;
     private String passphrase;
     private UsersCommand usersCommand;
+    public PublicKeyCommand publicKeyCommand;
 }

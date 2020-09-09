@@ -125,7 +125,7 @@
                                             <h5>Student's Result</h5>
 
                                         </center>
-                                        <!--/*@thymesVar id="res" type="ng.com.bitsystems.digitalsignature.model.Students"*/-->
+                                        <!--/*@thymesVar id="res" type="ng.com.bitsystems.digitalsignature.command.ResultCommand"*/-->
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                             <tr>
@@ -149,20 +149,13 @@
                                             </tfoot>
                                             <tbody>
 
-                                            <tr th:each="res: ${results.getResults()}">
-                                                <td th:text="${res.upload.course.courseCode}">CS 101</td>
-                                                <td th:text="${res.upload.course.courseTitle}">Introduction to computer science</td>
+                                            <tr th:each="res: ${results}">
+                                                <td th:text="${res.courseCode}">CS 101</td>
+                                                <td th:text="${res.courseTitle}">Introduction to computer science</td>
                                                 <td th:text="${res.testScore}">63</td>
                                                 <td th:text="${res.examScore}">B</td>
-                                                <td th:text="${res.examScore}  +${res.testScore}">B</td>
-
-                                                <td th:switch="${res.examScore + res.testScore}">
-                                                    <span th:case>="70">A+</span>
-                                                    <span th:case>="60">B+</span>
-                                                    <span th:case>="50">C+</span>
-                                                    <span th:case>="45">D+</span>
-                                                    <span th:case>="40">E+</span>
-                                                </td>
+                                                <td th:text="${res.total}">B</td>
+                                                <td th:text="${res.grade}">B</td>
                                             </tr>
                                             </tbody>
                                         </table>

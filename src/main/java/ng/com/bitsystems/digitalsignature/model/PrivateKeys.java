@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 
@@ -26,9 +24,19 @@ public class PrivateKeys extends BaseEntity {
     @JoinColumn(name = "users_id")
     private Users users;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private PublicKeys publicKeys;
+
 //    public PrivateKeys addPublicKey(PublicKeys publicKeys) {
 //        publicKeys.setPrivateKeys(this);
 //        //this.setPublicKeys(publicKeys);
 //        return this;
 //    }
+
+    public void setPublicKey(PublicKeys publicKey){
+        if(publicKey != null){
+            this.publicKeys = publicKey;
+            publicKey.setPrivateKeys(this);
+        }
+    }
 }
