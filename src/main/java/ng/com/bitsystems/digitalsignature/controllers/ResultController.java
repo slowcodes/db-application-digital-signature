@@ -122,7 +122,7 @@ public class ResultController {
 
         model.addAttribute("cgpa", cgpa);
         model.addAttribute("results", resultCommands);
-        return "pages/students.html";
+        return "pages/studentresults.html";
     }
 
     @PostMapping("/result/process_upload/")
