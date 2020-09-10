@@ -32,7 +32,7 @@
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="/">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -43,7 +43,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="/dashboard">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -56,8 +56,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/results/upload/">Upload Results</a>
-                                    <a class="nav-link" href="/dashboard/enter/">Enter Results</a>
-                                    <a class="nav-link" href="/dashboard/enter/">View Result</a>
+                                    <a class="nav-link" href="/dashboard/viewresults/">View Results</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -73,32 +72,31 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">View Courses</a>
-                                            <a class="nav-link" href="register.html">Course Result</a>
-                                            <a class="nav-link" href="password.html">Enrolled Students</a>
+                                            <a class="nav-link" href="/dashboard/mycourses/">View Courses</a>
+                                            <a class="nav-link" href="">Course Result</a>
                                         </nav>
                                     </div>
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Users
+                                    <a class="nav-link collapsed" href="/students" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        Enrolled Students
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">Lecturers</a>
-                                            <a class="nav-link" href="../error.html">Students</a>
-                                            <a class="nav-link" href="500.html">Administrators</a>
+                                            <!--                                            <a class="nav-link" href="401.html">Lecturers</a>-->
+                                            <a class="nav-link" href="/students">Students</a>
+                                            <!--                                            <a class="nav-link" href="/administrators">Administrators</a>-->
                                         </nav>
                                     </div>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Security</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="/keys/">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Public Keys
                             </a>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="/users/list/">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Private Keys
+                                App Users
                             </a>
                         </div>
                     </div>
@@ -135,7 +133,7 @@
                                 <form th:object="${upload}" th:action="@{'/result/process_upload/'}" method="post" class="needs-validation" enctype="multipart/form-data" novalidate  id="result-form">
                                     <input type="hidden" th:field="*{id}" >
                                     <div class="row">
-                                        <div class="col-md-12 mb-3">
+                                        <div class="col-md-6 mb-3">
                                             <div th:if="${keys != null and not #lists.isEmpty(keys)}">
                                                 <label for="keys">Signing Keys</label>
                                                 <select class="custom-select d-block w-100" id="keys"  th:field="*{privateKeyCommand.id}" required>
@@ -148,7 +146,19 @@
                                             <div class="invalid-feedback">
                                                 Please select a valid encryption key.
                                             </div>
+                                        </div>
 
+                                        <div class="col-md-6 mb-3">
+                                            <label for="semester">Semester</label>
+                                            <select class="custom-select d-block w-100" id="semester" required>
+                                                <!--                                                <option value="">Choose...</option>-->
+                                                <option>First Semester</option>
+                                                <option>Second Semester</option>
+                                                <!--                                                <option>AES </option>-->
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a valid passphrase.
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -201,7 +211,7 @@
 
                             </div>
                             <div class="col-md-4 order-md-2 mb-4">
-                                <b>Key in Use (Tag):</b>comphy
+<!--                                <b>Key in Use (Tag):</b>comphy-->
                                 <button class="btn btn-warning btn-lg btn-block" type="button">Create new encryption keys</button>
                                 <button class="btn btn-success btn-lg btn-block" type="button">Use existing keys</button>
                                 <button class="btn btn-danger btn-lg btn-block" type="button">Do not use encryption keys</button>

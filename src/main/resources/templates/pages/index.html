@@ -43,7 +43,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="/">
+                            <a class="nav-link" href="/dashboard">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -56,7 +56,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/results/upload/">Upload Results</a>
-                                    <a class="nav-link" href="/re">View Results</a>
+                                    <a class="nav-link" href="/dashboard/viewresults/">View Results</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -76,15 +76,15 @@
                                             <a class="nav-link" href="">Course Result</a>
                                         </nav>
                                     </div>
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Users
+                                    <a class="nav-link collapsed" href="/students" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        Enrolled Students
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
 <!--                                            <a class="nav-link" href="401.html">Lecturers</a>-->
                                             <a class="nav-link" href="/students">Students</a>
-                                            <a class="nav-link" href="/administrators">Administrators</a>
+<!--                                            <a class="nav-link" href="/administrators">Administrators</a>-->
                                         </nav>
                                     </div>
                                 </nav>
@@ -94,9 +94,9 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Public Keys
                             </a>
-                            <a class="nav-link" href="/publickey/">
+                            <a class="nav-link" href="/users/list/">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Private Keys
+                                App Users
                             </a>
                         </div>
                     </div>

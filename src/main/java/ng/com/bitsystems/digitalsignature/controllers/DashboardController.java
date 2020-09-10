@@ -33,8 +33,6 @@ public class DashboardController {
         return "pages/enter.html";
     }
 
-
-
     @RequestMapping("/dashboard/transcript/")
     public String privatekeys(Model model){
         return "pages/layout-static.html";

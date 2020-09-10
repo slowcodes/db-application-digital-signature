@@ -9,8 +9,8 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class ResultCommand {
-    private Double testScore;
-    private Double examScore;
+    private String testScore;
+    private String examScore;
     private StudentCommand studentCommand;
     private Long uploadId;
     private Long id;

@@ -3,6 +3,7 @@ package ng.com.bitsystems.digitalsignature.controllers;
 import lombok.extern.slf4j.Slf4j;
 import ng.com.bitsystems.digitalsignature.command.*;
 import ng.com.bitsystems.digitalsignature.converters.ResultsToResultsCommand;
+import ng.com.bitsystems.digitalsignature.model.PrivateKeys;
 import ng.com.bitsystems.digitalsignature.model.Results;
 import ng.com.bitsystems.digitalsignature.services.*;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Slf4j
@@ -25,14 +27,15 @@ public class ResultController {
     private CoursesServices coursesServices;
     private ResultsService resultsService;
     private SessionService sessionService;
-    private DepartmentService departmentService;
     private UploadService uploadService;
     private StudentsService studentsService;
     private PrivateKeyService privateKeyService;
     private UsersService usersService;
     private ResultsToResultsCommand resultsToResultsCommand;
+    private CipherService cipherService;
 
     public ResultController(CoursesServices coursesServices,
+                            CipherService cipherService,
                             ResultsToResultsCommand resultsToResultsCommand,
                             PrivateKeyService privateKeyService,
                             UsersService usersService,
@@ -43,8 +46,8 @@ public class ResultController {
                             StudentsService studentsService) {
         this.coursesServices = coursesServices;
         this.resultsService = resultsService;
+        this.cipherService = cipherService;
         this.sessionService = sessionService;
-        this.departmentService = departmentService;
         this.uploadService = uploadService;
         this.studentsService = studentsService;
         this.privateKeyService = privateKeyService;
@@ -70,14 +73,23 @@ public class ResultController {
 
         double cumulative = 0;
         double totalUnit = 0;
+
         for (Results result: results){
+            PrivateKeys signingKey = uploadService.findByID(result.getUpload().getId()).getPrivateKeys();
+
             double point = 0;
             ResultCommand resultCommand = resultsToResultsCommand.convert(result);
             resultCommand.setCourseTitle(result.getUpload().getCourse().getCourseTitle());
             resultCommand.setCourseCode(result.getUpload().getCourse().getCourseCode());
-            Double total = resultCommand.getExamScore() + resultCommand.getTestScore();
-            resultCommand.setTotal(total);
 
+            double exam = Double.parseDouble(cipherService.decrypt(resultCommand.getExamScore(),signingKey.getPrivateKey()));
+            double test = Double.parseDouble(cipherService.decrypt(resultCommand.getTestScore(),signingKey.getPrivateKey()));
+
+            resultCommand.setExamScore(cipherService.decrypt(resultCommand.getExamScore(),signingKey.getPrivateKey()));
+            resultCommand.setTestScore(cipherService.decrypt(resultCommand.getTestScore(),signingKey.getPrivateKey()));
+
+            double total = test + exam;
+            resultCommand.setTotal(total);
             if(total >= 70) {
                 resultCommand.setGrade("A");
                 point = 5;
@@ -110,7 +122,7 @@ public class ResultController {
 
         model.addAttribute("cgpa", cgpa);
         model.addAttribute("results", resultCommands);
-        return "pages/studentresults.html";
+        return "pages/myresultpage.html";
     }
 
     @PostMapping("/result/process_upload/")
@@ -127,12 +139,14 @@ public class ResultController {
 
                 CoursesCommand coursesCommand = coursesServices.getCourseCommandById(uploadCommand.getCoursesCommand().getId());
                 SessionCommand sessionCommand = sessionService.getSessionCommandById(uploadCommand.getSessionCommand().getId());
-
                 uploadCommand.setCoursesCommand(coursesCommand);
+
                 uploadCommand.setSessionCommand(sessionCommand);
+
                 uploadCommand.setDateOfUpload(LocalDate.now());
                 uploadCommand.setUsersCommand(usersService.findCommandById(new Long(1)));
-                uploadCommand.setPrivateKeyCommand(privateKeyService.findCommandByID(uploadCommand.getPrivateKeyCommand().getId()));
+                if(!Objects.equals(uploadCommand.getPrivateKeyCommand().getId(), null))
+                    uploadCommand.setPrivateKeyCommand(privateKeyService.findCommandByID(uploadCommand.getPrivateKeyCommand().getId()));
                 UploadCommand command = uploadService.addUploadCommand(uploadCommand);
 
                 byte[] bytes = file.getBytes();
@@ -151,8 +165,8 @@ public class ResultController {
 
                         ResultCommand resultCommand = new ResultCommand();
 
-                        resultCommand.setTestScore(Double.parseDouble(values[2]));
-                        resultCommand.setExamScore(Double.parseDouble(values[3]));
+                        resultCommand.setTestScore(values[2]);
+                        resultCommand.setExamScore(values[3]);
                         resultCommand.setStudentCommand(studentCommand);
                         resultCommand.setUploadId(command.getId());
                         //studentCommand.getResultCommands().add(resultCommand);

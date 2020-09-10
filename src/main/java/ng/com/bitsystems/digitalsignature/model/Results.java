@@ -13,8 +13,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Results extends BaseEntity {
 
-    private Double testScore;
-    private Double examScore;
+    private String testScore;
+    private String examScore;
 
     @ManyToOne
     @JoinColumn(name = "students_id")

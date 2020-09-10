@@ -37,7 +37,6 @@ public class KeyController {
 //        PrivateKeyCommand privateKeyCommand1 = privateKeyService.add(publicKeyCommand.getPrivateKeyCommand());
 //        publicKeyCommand.setPrivateKeyCommand(privateKeyCommand1);
 //        PublicKeyCommand publicKeyCommand1 = publicKeysService.add(publicKeyCommand);
-        log.info("Suim");
         privateKeyService.add(privateKeyCommand);
         model.addAttribute("message", "");
         model.addAttribute("messages", "");
