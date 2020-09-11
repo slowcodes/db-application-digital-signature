@@ -33,12 +33,22 @@ public class StudentResultBootstrap implements ApplicationListener<ContextRefres
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
+        PrivateKeys privateKeys2 = new PrivateKeys();
+        privateKeys2.setPassphrase("NoKey");
+        privateKeys2.setUsers(usersService.findByID(Long.valueOf(1)));
+        privateKeys2.setPrivateKey(" ");
+        privateKeys2.setCreatedAt(LocalDate.now());
+        privateKeyService.add(privateKeys2);
+
         PrivateKeys privateKeys = new PrivateKeys();
         privateKeys.setPassphrase("2019/2020coskey");
         privateKeys.setUsers(usersService.findByID(Long.valueOf(1)));
         privateKeys.setPrivateKey("94023irkw45u22qjr853u09jmfO90T4");
         privateKeys.setCreatedAt(LocalDate.now());
         privateKeyService.add(privateKeys);
+
+
+
         Set<Faculties> faculties = new HashSet<>();
 
         Faculties sciences = Faculties.builder().faculty("Sciences").build();

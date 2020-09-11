@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -86,6 +86,7 @@
                                             <th>Exam Score</th>
                                             <th>Total</th>
                                             <th>Grade</th>
+                                            <th>Verify</th>
                                         </tr>
                                         </thead>
                                         <tfoot>
@@ -96,6 +97,7 @@
                                             <th>Exam Score</th>
                                             <th>Total</th>
                                             <th>Grade</th>
+                                            <th>Verify</th>
                                         </tr>
                                         </tfoot>
                                         <tbody>
@@ -107,6 +109,10 @@
                                             <td th:text="${res.examScore}">B</td>
                                             <td th:text="${res.total}">B</td>
                                             <td th:text="${res.grade}">B</td>
+                                            <td>
+                                                <span th:if="${res.uploadId == 1}">Not verified <img src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/24/Status-dialog-warning-icon.png"></span>
+                                                <span th:unless="${res.uploadId == 1}">Verified <img src="https://icons.iconarchive.com/icons/graphicrating/quartz/32/Folder-verified-icon.png"></span>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>

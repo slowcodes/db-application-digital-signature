@@ -137,7 +137,7 @@
                                             <div th:if="${keys != null and not #lists.isEmpty(keys)}">
                                                 <label for="keys">Signing Keys</label>
                                                 <select class="custom-select d-block w-100" id="keys"  th:field="*{privateKeyCommand.id}" required>
-                                                    <option value="">Choose...</option>
+<!--                                                    <option value="">Choose...</option>-->
                                                     <option th:each="key : ${keys}"
                                                             th:value="${key.id}"
                                                             th:text="${key.passphrase}" />

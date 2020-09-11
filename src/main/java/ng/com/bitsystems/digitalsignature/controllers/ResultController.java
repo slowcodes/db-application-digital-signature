@@ -82,11 +82,22 @@ public class ResultController {
             resultCommand.setCourseTitle(result.getUpload().getCourse().getCourseTitle());
             resultCommand.setCourseCode(result.getUpload().getCourse().getCourseCode());
 
-            double exam = Double.parseDouble(cipherService.decrypt(resultCommand.getExamScore(),signingKey.getPrivateKey()));
-            double test = Double.parseDouble(cipherService.decrypt(resultCommand.getTestScore(),signingKey.getPrivateKey()));
+            double exam =0;
+            double test =0;
+            if(result.getUpload().getId() != 1){
+                exam = Double.parseDouble(cipherService.decrypt(resultCommand.getExamScore(),signingKey.getPrivateKey()));
+                test = Double.parseDouble(cipherService.decrypt(resultCommand.getTestScore(),signingKey.getPrivateKey()));
 
-            resultCommand.setExamScore(cipherService.decrypt(resultCommand.getExamScore(),signingKey.getPrivateKey()));
-            resultCommand.setTestScore(cipherService.decrypt(resultCommand.getTestScore(),signingKey.getPrivateKey()));
+                resultCommand.setExamScore(cipherService.decrypt(resultCommand.getExamScore(),signingKey.getPrivateKey()));
+                resultCommand.setTestScore(cipherService.decrypt(resultCommand.getTestScore(),signingKey.getPrivateKey()));
+            }
+            else{
+                exam = Double.parseDouble(resultCommand.getExamScore());
+                test = Double.parseDouble(resultCommand.getTestScore());
+
+                resultCommand.setExamScore(String.valueOf(exam));
+                resultCommand.setTestScore(String.valueOf(test));
+            }
 
             double total = test + exam;
             resultCommand.setTotal(total);

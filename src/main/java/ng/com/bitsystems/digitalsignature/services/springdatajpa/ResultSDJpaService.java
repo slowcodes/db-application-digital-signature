@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -70,7 +69,7 @@ public class ResultSDJpaService implements ResultsService {
         Results results = resultsCommandToResults.convert(resultCommand);
 
 
-        if(!Objects.equals(uploadService.findByID(results.getUpload().getId()).getPrivateKeys().getPrivateKey(), null)){
+        if(results.getUpload().getId() !=1 ){
 
             PrivateKeys signingKey = uploadService.findByID(results.getUpload().getId()).getPrivateKeys();
 
